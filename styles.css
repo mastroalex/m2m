@@ -89,6 +89,7 @@ body, html {
 }
 
 .scrolling-part .media img {
+    justify-content: center;
     width: 50%; /* Image width 100% of its container */
     height: auto; /* Maintain aspect ratio */
     object-fit: cover;
@@ -106,8 +107,8 @@ body, html {
 
 .scrolling-part .media canvas {
     width: auto; /* Width 100% of the container */
-    height: 100%; /* Full height of the container */
-    aspect-ratio: 1;
+    height: 380px; /* Full height of the container */
+    aspect-ratio: 1.4;
     display: block;
     margin: auto;
     background-color: transparent; /* Remove background color if any */
@@ -143,5 +144,13 @@ body, html {
     .scrolling-part .media .generic-content {
         width: 100%; /* Full width on mobile */
         height: auto; /* Adjust height automatically */
+    }
+    .scrolling-part .media canvas {
+        width: auto; /* Width 100% of the container */
+        height: 280px; /* Full height of the container */
+        aspect-ratio: 1.2;
+        display: block;
+        margin: auto;
+        background-color: transparent; /* Remove background color if any */
     }
 }
