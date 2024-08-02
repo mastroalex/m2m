@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Function to get JSON path or URL from the URL
+    // Function to get JSON URL from the query parameter
     function getJsonUrlFromUrl() {
         const urlParams = new URLSearchParams(window.location.search);
         const jsonUrl = urlParams.get('jsonurl');
@@ -15,20 +15,38 @@ document.addEventListener('DOMContentLoaded', () => {
             data.sections.forEach(section => {
                 const scrollSection = document.querySelector(`#${section.id}`);
                 const scrollContent = scrollSection.querySelector('.scroll-content');
-                
+
+                // Set the title and subtitle in the fixed part
+                const fixedPart = scrollSection.querySelector('.fixed-part');
+                fixedPart.querySelector('.title').textContent = section.title;
+                fixedPart.querySelector('.subtitle').textContent = section.subtitle;
+
                 section.contents.forEach((content, index) => {
                     const scrollingPart = scrollContent.children[index];
                     scrollingPart.querySelector('.left-content .text').textContent = content.text;
-
-                    // Set the title and subtitle in the fixed part
-                    const fixedPart = scrollSection.querySelector('.fixed-part');
-                    fixedPart.querySelector('.title').textContent = content.title;
-                    fixedPart.querySelector('.subtitle').textContent = content.subtitle;
 
                     if (content.isImage) {
                         const imageElement = document.createElement('img');
                         imageElement.src = content.image;
                         scrollingPart.querySelector('.right-content .media').appendChild(imageElement);
+                    } else if (content.canvasType === 'chart') {
+                        const canvasElement = document.createElement('div');
+                        canvasElement.classList.add('chartjs-canvas');
+                        scrollingPart.querySelector('.right-content .media').appendChild(canvasElement);
+
+                        // Call the specified function to generate the Chart.js content
+                        if (content.contentFunction && typeof window[content.contentFunction] === 'function') {
+                            window[content.contentFunction](canvasElement);
+                        }
+                    } else if (content.canvasType === 'babylon') {
+                        const canvasElement = document.createElement('div');
+                        canvasElement.classList.add('babylon-canvas');
+                        scrollingPart.querySelector('.right-content .media').appendChild(canvasElement);
+
+                        // Call the specified function to generate the Babylon.js content
+                        if (content.contentFunction && typeof window[content.contentFunction] === 'function') {
+                            window[content.contentFunction](canvasElement);
+                        }
                     } else {
                         const divElement = document.createElement('div');
                         divElement.classList.add('generic-content');
