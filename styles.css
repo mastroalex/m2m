@@ -70,6 +70,7 @@ body, html {
 
 .left-content, .right-content {
     width: 50%;
+    height: 100%; /* Ensure they take full height of the scroll-section */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,7 +89,7 @@ body, html {
 }
 
 .scrolling-part .media img {
-    width: 50%; /* Image width 50% of its container */
+    width: 50%; /* Image width 100% of its container */
     height: auto; /* Maintain aspect ratio */
     object-fit: cover;
     display: block;
@@ -106,16 +107,23 @@ body, html {
 .scrolling-part .media canvas {
     width: auto; /* Width 100% of the container */
     height: 100%; /* Full height of the container */
+    aspect-ratio: 1;
     display: block;
     margin: auto;
-    aspect-ratio: 1.4;
     background-color: transparent; /* Remove background color if any */
 }
 
 /* Media query for mobile screens */
 @media (max-width: 768px) {
+    .main-section {
+        height: 500px;
+        background-color: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     .scroll-section {
-        height: 700px; /* Double the height for mobile */
+        height: 600px; /* Adjust the height for mobile */
     }
     .scroll-content {
         width: 300vw; /* Maintain horizontal scroll content */
@@ -124,17 +132,16 @@ body, html {
     .scrolling-part {
         flex-direction: column; /* Stack left and right content vertically */
     }
-    .scrolling-part .media img{
-        height: 60%; /* Full width on mobile */
-        width: auto; /* Adjust height automatically */
+    .scrolling-part .media img {
+        height: 60%; /* Image height 60% of container */
+        width: auto; /* Adjust width automatically */
     }
     .left-content, .right-content {
         width: 100%;
         height: 50%; /* Each takes half the height */
     }
-    .scrolling-part .media .generic-content, .scrolling-part .media canvas {
+    .scrolling-part .media .generic-content {
         width: 100%; /* Full width on mobile */
         height: auto; /* Adjust height automatically */
     }
-    
 }
