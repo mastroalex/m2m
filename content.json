@@ -1,0 +1,57 @@
+{
+    "sections": [
+      {
+        "id": "scroll-section-1",
+        "contents": [
+          {
+            "title": "Title 1",
+            "subtitle": "Subtitle 1",
+            "text": "Content 1 Text",
+            "image": "assets/imgs/empty.png",
+            "isImage": true
+          },
+          {
+            "title": "Title 2",
+            "subtitle": "Subtitle 2",
+            "text": "Content 2 Text",
+            "image": "assets/imgs/empty.png",
+            "isImage": true
+          },
+          {
+            "title": "Title 3",
+            "subtitle": "Subtitle 3",
+            "text": "Content 3 Text",
+            "isImage": false,
+            "contentFunction": "createBabylonScene"
+          }
+        ]
+      },
+      {
+        "id": "scroll-section-2",
+        "contents": [
+          {
+            "title": "Title A",
+            "subtitle": "Subtitle A",
+            "text": "Content A Text",
+            "image": "assets/imgs/empty.png",
+            "isImage": true
+          },
+          {
+            "title": "Title B",
+            "subtitle": "Subtitle B",
+            "text": "Content B Text",
+            "image": "assets/imgs/empty.png",
+            "isImage": false,
+            "contentFunction" : "createChart"
+          },
+          {
+            "title": "Title C",
+            "subtitle": "Subtitle C",
+            "text": "Content C Text",
+            "isImage": false,
+            "contentFunction": "createBabylonScene2"
+          }
+        ]
+      }
+    ]
+  }
