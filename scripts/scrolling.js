@@ -7,15 +7,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 const scrollContent = scrollSection.querySelector('.scroll-content');
                 section.contents.forEach((content, index) => {
                     const scrollingPart = scrollContent.children[index];
-                    scrollingPart.querySelector('.text').textContent = content.text;
+                    scrollingPart.querySelector('.left-content .text').textContent = content.text;
                     if (content.isImage) {
                         const imageElement = document.createElement('img');
                         imageElement.src = content.image;
-                        scrollingPart.querySelector('.media').appendChild(imageElement);
+                        scrollingPart.querySelector('.right-content .media').appendChild(imageElement);
                     } else {
                         const divElement = document.createElement('div');
                         divElement.classList.add('generic-content');
-                        scrollingPart.querySelector('.media').appendChild(divElement);
+                        scrollingPart.querySelector('.right-content .media').appendChild(divElement);
 
                         // Call the specified function to generate the generic content
                         if (content.contentFunction && typeof window[content.contentFunction] === 'function') {
@@ -79,7 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Initialize both scroll sections
+    // Initialize all scroll sections
     initializeScrollSection('scroll-section-1');
     initializeScrollSection('scroll-section-2');
+    initializeScrollSection('scroll-section-3');
 });

@@ -52,6 +52,32 @@
             "contentFunction": "createBabylonScene2"
           }
         ]
+      },
+      {
+        "id": "scroll-section-3",
+        "contents": [
+          {
+            "title": "Title X",
+            "subtitle": "Subtitle X",
+            "text": "Content X Text",
+            "image": "path/to/imageX.png",
+            "isImage": true
+          },
+          {
+            "title": "Title Y",
+            "subtitle": "Subtitle Y",
+            "text": "Content Y Text",
+            "image": "path/to/imageY.png",
+            "isImage": true
+          },
+          {
+            "title": "Title Z",
+            "subtitle": "Subtitle Z",
+            "text": "Content Z Text",
+            "isImage": false,
+            "contentFunction": "createChart"
+          }
+        ]
       }
     ]
   }

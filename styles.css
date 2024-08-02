@@ -5,7 +5,7 @@ body, html {
 }
 
 .page-wrapper {
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -50,54 +50,91 @@ body, html {
 .scroll-content {
     display: flex;
     height: 100%;
-    transition: transform 1.5s ease-in-out; /* Increased transition duration */
+    width: 300vw; /* 3 sections of 100vw each */
+    transition: transform 1.5s ease-in-out; /* Smooth transition */
     position: absolute;
-    width: 100%;
     top: 0;
     left: 0;
     z-index: 0; /* Ensure it stays behind the fixed part */
 }
 
 .scrolling-part {
-    min-width: 100vw;
+    display: flex;
+    flex-direction: row; /* Ensure horizontal layout */
     height: 100%;
+    width: 100vw; /* Each part takes full viewport width */
+    background-color: #ccc; /* Background color for each part */
+    justify-content: center;
+    align-items: center;
+}
+
+.left-content, .right-content {
+    width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ccc;
-    font-size: 2em;
 }
 
-.scrolling-part .text {
-    width: 50%;
-    padding: 20px;
+.left-content .text {
+    width: 100%;
+    padding-left: 20px;
     box-sizing: border-box;
     font-size: 1.2em;
     text-align: left;
 }
 
-.scrolling-part .media {
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+.right-content {
+    flex-direction: column;
 }
 
 .scrolling-part .media img {
-    height: 50%;
+    width: 50%; /* Image width 50% of its container */
+    height: auto; /* Maintain aspect ratio */
     object-fit: cover;
+    display: block;
+    margin: auto;
 }
 
 .scrolling-part .media .generic-content {
-    width: 100%;
-    height: 100%;
+    width: 100%; /* Width 100% of the container */
+    height: 100%; /* Full height of the container */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .scrolling-part .media canvas {
-    width: 100%;
-    height: 100%;
+    width: auto; /* Width 100% of the container */
+    height: 100%; /* Full height of the container */
+    display: block;
+    margin: auto;
+    aspect-ratio: 1.4;
+    background-color: transparent; /* Remove background color if any */
+}
+
+/* Media query for mobile screens */
+@media (max-width: 768px) {
+    .scroll-section {
+        height: 700px; /* Double the height for mobile */
+    }
+    .scroll-content {
+        width: 300vw; /* Maintain horizontal scroll content */
+        flex-direction: row; /* Maintain horizontal layout */
+    }
+    .scrolling-part {
+        flex-direction: column; /* Stack left and right content vertically */
+    }
+    .scrolling-part .media img{
+        height: 60%; /* Full width on mobile */
+        width: auto; /* Adjust height automatically */
+    }
+    .left-content, .right-content {
+        width: 100%;
+        height: 50%; /* Each takes half the height */
+    }
+    .scrolling-part .media .generic-content, .scrolling-part .media canvas {
+        width: 100%; /* Full width on mobile */
+        height: auto; /* Adjust height automatically */
+    }
+    
 }
