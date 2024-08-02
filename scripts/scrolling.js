@@ -1,13 +1,30 @@
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('content.json')
+    // Function to get JSON path or URL from the URL
+    function getJsonUrlFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const jsonUrl = urlParams.get('jsonurl');
+        return jsonUrl || 'content.json'; // Default to 'content.json' if no URL is specified
+    }
+
+    // Get JSON URL from URL or default to 'content.json'
+    const jsonUrl = getJsonUrlFromUrl();
+
+    fetch(jsonUrl)
         .then(response => response.json())
         .then(data => {
             data.sections.forEach(section => {
                 const scrollSection = document.querySelector(`#${section.id}`);
                 const scrollContent = scrollSection.querySelector('.scroll-content');
+                
                 section.contents.forEach((content, index) => {
                     const scrollingPart = scrollContent.children[index];
                     scrollingPart.querySelector('.left-content .text').textContent = content.text;
+
+                    // Set the title and subtitle in the fixed part
+                    const fixedPart = scrollSection.querySelector('.fixed-part');
+                    fixedPart.querySelector('.title').textContent = content.title;
+                    fixedPart.querySelector('.subtitle').textContent = content.subtitle;
+
                     if (content.isImage) {
                         const imageElement = document.createElement('img');
                         imageElement.src = content.image;
@@ -22,6 +39,16 @@ document.addEventListener('DOMContentLoaded', () => {
                             window[content.contentFunction](divElement);
                         }
                     }
+                });
+            });
+
+            // Add event listeners to stop scroll propagation on canvas elements
+            document.querySelectorAll('.scrolling-part .media canvas').forEach(canvas => {
+                canvas.addEventListener('wheel', (event) => {
+                    event.stopPropagation();
+                });
+                canvas.addEventListener('touchmove', (event) => {
+                    event.stopPropagation();
                 });
             });
         });
