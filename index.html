@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webpage with Horizontal Scroll</title>
+    <title>Webpage with Horizontal Scroll and Babylon.js</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.babylonjs.com/babylon.js"></script>
-    <script src="https://cdn.babylonjs.com/babylon.max.js"></script>
     <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
-    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="page-wrapper">
@@ -18,27 +17,21 @@
         <div class="scroll-section" id="scroll-section-1">
             <div class="content">
                 <div class="fixed-part">
-                    <div class="title">Title Part 1</div>
-                    <div class="subtitle">Sub Part 1</div>
+                    <div class="title">Fixed Title 1</div>
+                    <div class="subtitle">Fixed Subtitle 1</div>
                 </div>
                 <div class="scroll-content">
                     <div class="scrolling-part">
                         <div class="text">Content 1 Text</div>
-                        <div class="canvas-container">
-                            <canvas id="renderCanvas1"></canvas>
-                        </div>
+                        <div class="media"></div>
                     </div>
                     <div class="scrolling-part">
                         <div class="text">Content 2 Text</div>
-                        <div class="image">
-                            <img src="image.png" alt="Image 2">
-                        </div>
+                        <div class="media"></div>
                     </div>
                     <div class="scrolling-part">
                         <div class="text">Content 3 Text</div>
-                        <div class="image">
-                            <img src="image.png" alt="Image 3">
-                        </div>
+                        <div class="media"></div>
                     </div>
                 </div>
             </div>
@@ -46,33 +39,28 @@
         <div class="scroll-section" id="scroll-section-2">
             <div class="content">
                 <div class="fixed-part">
-                    <div class="title">Title Part 2</div>
-                    <div class="subtitle">Sub Part 2</div>
+                    <div class="title">Fixed Title 2</div>
+                    <div class="subtitle">Fixed Subtitle 2</div>
                 </div>
                 <div class="scroll-content">
                     <div class="scrolling-part">
                         <div class="text">Content A Text</div>
-                        <div class="image">
-                            <img src="image.png" alt="Image 1">
-                        </div>
+                        <div class="media"></div>
                     </div>
                     <div class="scrolling-part">
-                        <div class="text">Content A Text</div>
-                        <div class="image">
-                            <img src="image.png" alt="Image 2">
-                        </div>
+                        <div class="text">Content B Text</div>
+                        <div class="media"></div>
                     </div>
                     <div class="scrolling-part">
-                        <div class="text">Content A Text</div>
-                        <div class="image">
-                            <img src="image.png" alt="Image 3">
-                        </div>
+                        <div class="text">Content C Text</div>
+                        <div class="media"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scrollbar/8.6.0/smooth-scrollbar.js"></script>    
-    <script src="scripts.js"></script>
+    <script src="scripts/scrolling.js"></script>
+    <script src="scripts/babylon-setup.js"></script>
+    <script src="scripts/chart.js"></script>
 </body>
 </html>
