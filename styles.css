@@ -113,7 +113,7 @@ body, html {
 .scrolling-part .media .babylon-canvas canvas {
     width: auto; /* Width 100% of the container */
     height: 380px; /* Full height of the container */
-    aspect-ratio: 1.4;
+    aspect-ratio: 1.3;
     display: block;
     margin: auto;
     background-color: transparent; /* Remove background color if any */
@@ -138,11 +138,9 @@ body, html {
         align-items: center;
     }
 
-
     .scroll-section {
-        height: 680px; /* Adjust the height for mobile */
+        height: 500px; /* Adjust the height for mobile */
     }
-
 
     .scroll-content {
         width: 300vw; /* Maintain horizontal scroll content */
@@ -197,6 +195,29 @@ body, html {
         margin: auto;
         background-color: transparent; /* Remove background color if any */
     }   
+}
 
+/* Resize text for very small screens */
+@media (max-width: 350px) {
+    .fixed-part .title {
+        font-size: 5vw;
+        font-weight: bold;
+    }
+    
+    .fixed-part .subtitle {
+        font-size: 4vw;
+        margin-left: 10px;
+        margin-left: 10px;
+        left: 30px;
+    }
+
+    .left-content .text {
+        width: 100%;
+        padding-left: 0px;
+        margin: 50px;
+        box-sizing: border-box;
+        font-size: 4vw;
+        text-align: center;
+    }
 
 }
