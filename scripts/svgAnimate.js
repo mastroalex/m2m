@@ -70,28 +70,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Function to show the journal on hover
         function showJournal() {
-            gsap.to('.journal-container', {
-                duration: 1,
-                opacity: 1,
-                rotationY: 180,
-                ease: "power2.inOut",
-                onStart: () => {
-                    document.querySelector('.journal-container').style.display = 'block';
-                }
-            });
+            const journalContainer = document.querySelector('.journal-container');
+            if (journalContainer) {
+                gsap.to(journalContainer, {
+                    duration: 1,
+                    opacity: 1,
+                    rotationY: 180,
+                    ease: "power2.inOut",
+                    onStart: () => {
+                        journalContainer.style.display = 'block';
+                    }
+                });
+            }
         }
 
         // Function to hide the journal on mouse leave
         function hideJournal() {
-            gsap.to('.journal-container', {
-                duration: 1,
-                opacity: 0,
-                rotationY: 0,
-                ease: "power1.out",
-                onComplete: () => {
-                    document.querySelector('.journal-container').style.display = 'none';
-                }
-            });
+            const journalContainer = document.querySelector('.journal-container');
+            if (journalContainer) {
+                gsap.to(journalContainer, {
+                    duration: 1,
+                    opacity: 0,
+                    rotationY: 0,
+                    ease: "power1.out",
+                    onComplete: () => {
+                        journalContainer.style.display = 'none';
+                    }
+                });
+            }
         }
 
         // Add hover event to show journal on ellipse hover
@@ -105,8 +111,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Add click event to the journalContainer to open a link
-        document.querySelector('.journal-container').addEventListener('click', () => {
-            window.open('https://example.com', '_blank'); // Replace with your desired URL
-        });
+        const journalContainer = document.querySelector('.journal-container');
+        if (journalContainer) {
+            journalContainer.addEventListener('click', () => {
+                window.open('https://example.com', '_blank'); // Replace with your desired URL
+            });
+        }
     }
 });
