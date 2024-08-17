@@ -239,6 +239,8 @@ body, html {
     display: flex;
     justify-content: center;
     margin-top: 10px;
+    position: relative; /* or absolute/fixed depending on your layout needs */
+    z-index: 10; /* Higher value ensures it's on top */
 }
 
 .dot {
@@ -249,8 +251,10 @@ body, html {
     border-radius: 50%;
     display: inline-block;
     transition: background-color 0.3s;
+    z-index: 11; /* Ensure dots are above other content within the pagination container */
 }
 
 .dot.active {
     background-color: #717171;
+    z-index: 12; /* Active dot on top of others */
 }
