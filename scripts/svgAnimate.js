@@ -29,14 +29,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         svgElement.style.objectFit = 'contain';
                         svgElement.setAttribute('preserveAspectRatio', 'xMidYMid meet');
 
-                        applyAnimations();
+                        applyAnimations(svgElement);
                     }
                 })
                 .catch(error => console.error('Error loading SVG:', error));
         })
         .catch(error => console.error('Error fetching JSON:', error));
 
-    function applyAnimations() {
+    function applyAnimations(svgElement) {
         gsap.fromTo(".formula", 
             {
                 opacity: 0,
@@ -72,7 +72,21 @@ document.addEventListener('DOMContentLoaded', () => {
             clearTimeout(hideJournalTimeout);  // Clear any pending timeout
             const journalContainer = document.querySelector('#journal-container');
             const journalImage = document.querySelector('#journal-image');
+            
             if (journalContainer) {
+                // Position the journal-container based on the svgElement size and position
+                const svgRect = svgElement.getBoundingClientRect();
+                const journalWidth = journalContainer.offsetWidth;
+                const journalHeight = journalContainer.offsetHeight;
+                
+                // Calculate the desired position
+                const leftPosition = svgRect.left + svgRect.width * 0.75 - journalWidth / 2;
+                const topPosition = svgRect.top + svgRect.height / 2 - journalHeight / 2;
+                
+                // Apply the calculated position
+                journalContainer.style.left = `${leftPosition}px`;
+                journalContainer.style.top = `${topPosition}px`;
+
                 gsap.to(journalContainer, {
                     duration: 1,
                     opacity: 1,
