@@ -78,51 +78,56 @@ document.addEventListener('DOMContentLoaded', () => {
             stagger: 0.2 // Staggers the start of each element's animation by 0.2 seconds
         });
 
-        // Create a clickable journal that appears on hover over the ellipse
-        const journalDiv = document.createElement('div');
-        journalDiv.classList.add('journal-popup');
-        document.body.appendChild(journalDiv);
+        // Create a journal container that appears on hover over the ellipse
+        const journalContainer = document.createElement('div');
+        journalContainer.classList.add('journal-container');
+        document.body.appendChild(journalContainer);
 
-        gsap.set(journalDiv, {
-            width: '200px',
-            height: '300px',
-            backgroundImage: 'url("https://images.unsplash.com/photo-1579127586892-3c877fd5a1cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDJ8fGpvYXJuYWx8ZW58MHx8fHwxNjEyNzk0OTg0&ixlib=rb-1.2.1&q=80&w=400")',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            position: 'absolute',
-            top: '50%',
-            left: '75%',
-            x: '-50%',
-            y: '-50%',
+        const journalImage = document.createElement('div');
+        journalImage.classList.add('journal-image');
+        journalContainer.appendChild(journalImage);
+
+        gsap.set(journalContainer, {
             opacity: 0,
-            boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.3)',
-            cursor: 'pointer',
+            rotationY: 0,
             zIndex: 10
         });
 
         // Animation to show the journal on hover over the ellipse
         document.querySelectorAll('.ellipse').forEach(ellipse => {
             ellipse.addEventListener('mouseenter', () => {
-                gsap.to(journalDiv, {
+                gsap.to(journalContainer, {
                     duration: 1,
                     opacity: 1,
-                    scale: 1.1,
                     ease: "power1.out"
                 });
+
+                // Rotate to reveal the journal image
+                gsap.fromTo(journalContainer, 
+                    { rotationY: 0 }, 
+                    { 
+                        duration: 1.5, 
+                        rotationY: 180, 
+                        ease: "power2.inOut",
+                        onComplete: () => {
+                            journalImage.style.display = 'block';
+                        }
+                    }
+                );
             });
 
             ellipse.addEventListener('mouseleave', () => {
-                gsap.to(journalDiv, {
+                gsap.to(journalContainer, {
                     duration: 1,
                     opacity: 0,
-                    scale: 1,
+                    rotationY: 0,
                     ease: "power1.out"
                 });
             });
         });
 
-        // Add click event to the journalDiv to open a link
-        journalDiv.addEventListener('click', () => {
+        // Add click event to the journalContainer to open a link
+        journalContainer.addEventListener('click', () => {
             window.open('https://example.com', '_blank'); // Replace with your desired URL
         });
     }
