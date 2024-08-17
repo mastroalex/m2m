@@ -1,8 +1,8 @@
 {
   "mainSection": {
     "svgImage": {
-      "link": "https://github.com/mastroalex/m2m/blob/df01c02c05c0d56c0d794ac6b0fda360efdd0e89/assets/imgs/drawing.svg",
-      "cssLink": "https://github.com/mastroalex/m2m/blob/df01c02c05c0d56c0d794ac6b0fda360efdd0e89/assets/svg-css-test.css"
+      "link": "https://raw.githubusercontent.com/mastroalex/m2m/main/assets/imgs/drawing.svg",
+      "cssLink": "https://raw.githubusercontent.com/mastroalex/m2m/main/assets/svg-css-test.css"
     }
   },
     "sections": [
