@@ -12,6 +12,24 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(jsonUrl)
         .then(response => response.json())
         .then(data => {
+            // Load the main section SVG and CSS
+            const mainSectionSvgContainer = document.getElementById('main-section-svg');
+
+            // Load the SVG
+            fetch(data.mainSection.svgImage.link)
+                .then(response => response.text())
+                .then(svgData => {
+                    mainSectionSvgContainer.innerHTML = svgData;
+
+                    // Load the associated CSS
+                    const svgStylesheet = document.createElement('link');
+                    svgStylesheet.rel = 'stylesheet';
+                    svgStylesheet.href = data.mainSection.svgImage.cssLink;
+                    document.head.appendChild(svgStylesheet);
+                })
+                .catch(error => console.error('Error loading SVG:', error));
+
+            // Load the scroll sections and content
             data.sections.forEach(section => {
                 const scrollSection = document.querySelector(`#${section.id}`);
                 const scrollContent = scrollSection.querySelector('.scroll-content');
@@ -75,81 +93,82 @@ document.addEventListener('DOMContentLoaded', () => {
                     event.stopPropagation();
                 });
             });
+        })
+        .catch(error => console.error('Error fetching JSON:', error));
+
+    function initializeScrollSection(sectionId) {
+        const scrollSection = document.querySelector(`#${sectionId}`);
+        const scrollContent = scrollSection.querySelector('.scroll-content');
+        const contents = scrollContent.querySelectorAll('.scrolling-part');
+        const dots = scrollSection.querySelectorAll('.pagination-dots .dot');
+
+        let index = 0;
+        let scrollCounter = 0;
+        const scrollThreshold = 20; // Adjust as needed to make the scroll less sensitive
+
+        function updateDots(currentIndex) {
+            dots.forEach((dot, i) => {
+                if (i === currentIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        scrollSection.addEventListener('wheel', (event) => {
+            event.preventDefault();
+
+            // Update scroll counter based on scroll direction
+            scrollCounter += event.deltaY;
+
+            if (scrollCounter > scrollThreshold) {
+                // Scroll down
+                index = (index + 1) % contents.length;
+                scrollContent.style.transform = `translateX(-${index * 100}vw)`;
+                scrollCounter = 0; // Reset counter
+                updateDots(index);
+            } else if (scrollCounter < -scrollThreshold) {
+                // Scroll up
+                index = (index - 1 + contents.length) % contents.length;
+                scrollContent.style.transform = `translateX(-${index * 100}vw)`;
+                scrollCounter = 0; // Reset counter
+                updateDots(index);
+            }
         });
 
-        function initializeScrollSection(sectionId) {
-            const scrollSection = document.querySelector(`#${sectionId}`);
-            const scrollContent = scrollSection.querySelector('.scroll-content');
-            const contents = scrollContent.querySelectorAll('.scrolling-part');
-            const dots = scrollSection.querySelectorAll('.pagination-dots .dot');
-    
-            let index = 0;
-            let scrollCounter = 0;
-            const scrollThreshold = 20; // Adjust as needed to make the scroll less sensitive
-    
-            function updateDots(currentIndex) {
-                dots.forEach((dot, i) => {
-                    if (i === currentIndex) {
-                        dot.classList.add('active');
-                    } else {
-                        dot.classList.remove('active');
-                    }
-                });
+        // Handle touch events for mobile
+        let touchStartX = 0;
+
+        scrollSection.addEventListener('touchstart', (event) => {
+            touchStartX = event.touches[0].clientX;
+        });
+
+        scrollSection.addEventListener('touchmove', (event) => {
+            const touchEndX = event.touches[0].clientX;
+            const touchDeltaX = touchStartX - touchEndX;
+
+            if (touchDeltaX > scrollThreshold) {
+                // Swipe left
+                index = (index + 1) % contents.length;
+                scrollContent.style.transform = `translateX(-${index * 100}vw)`;
+                touchStartX = touchEndX; // Reset touch start
+                updateDots(index);
+            } else if (touchDeltaX < -scrollThreshold) {
+                // Swipe right
+                index = (index - 1 + contents.length) % contents.length;
+                scrollContent.style.transform = `translateX(-${index * 100}vw)`;
+                touchStartX = touchEndX; // Reset touch start
+                updateDots(index);
             }
-    
-            scrollSection.addEventListener('wheel', (event) => {
-                event.preventDefault();
-    
-                // Update scroll counter based on scroll direction
-                scrollCounter += event.deltaY;
-    
-                if (scrollCounter > scrollThreshold) {
-                    // Scroll down
-                    index = (index + 1) % contents.length;
-                    scrollContent.style.transform = `translateX(-${index * 100}vw)`;
-                    scrollCounter = 0; // Reset counter
-                    updateDots(index);
-                } else if (scrollCounter < -scrollThreshold) {
-                    // Scroll up
-                    index = (index - 1 + contents.length) % contents.length;
-                    scrollContent.style.transform = `translateX(-${index * 100}vw)`;
-                    scrollCounter = 0; // Reset counter
-                    updateDots(index);
-                }
-            });
-    
-            // Handle touch events for mobile
-            let touchStartX = 0;
-    
-            scrollSection.addEventListener('touchstart', (event) => {
-                touchStartX = event.touches[0].clientX;
-            });
-    
-            scrollSection.addEventListener('touchmove', (event) => {
-                const touchEndX = event.touches[0].clientX;
-                const touchDeltaX = touchStartX - touchEndX;
-    
-                if (touchDeltaX > scrollThreshold) {
-                    // Swipe left
-                    index = (index + 1) % contents.length;
-                    scrollContent.style.transform = `translateX(-${index * 100}vw)`;
-                    touchStartX = touchEndX; // Reset touch start
-                    updateDots(index);
-                } else if (touchDeltaX < -scrollThreshold) {
-                    // Swipe right
-                    index = (index - 1 + contents.length) % contents.length;
-                    scrollContent.style.transform = `translateX(-${index * 100}vw)`;
-                    touchStartX = touchEndX; // Reset touch start
-                    updateDots(index);
-                }
-            });
-    
-            // Initialize dots
-            updateDots(index);
-        }
-    
-        // Initialize all scroll sections
-        initializeScrollSection('scroll-section-1');
-        initializeScrollSection('scroll-section-2');
-        initializeScrollSection('scroll-section-3');
-    });
+        });
+
+        // Initialize dots
+        updateDots(index);
+    }
+
+    // Initialize all scroll sections
+    initializeScrollSection('scroll-section-1');
+    initializeScrollSection('scroll-section-2');
+    initializeScrollSection('scroll-section-3');
+});
