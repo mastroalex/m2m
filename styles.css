@@ -159,6 +159,7 @@ body, html {
 
     .scroll-section {
         height: 550px; /* Adjust the height for mobile */
+        margin-bottom: 20px; /* Add margin between sections */
     }
 
     .scroll-content {
