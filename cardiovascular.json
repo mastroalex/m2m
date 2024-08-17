@@ -1,8 +1,7 @@
 {
   "mainSection": {
     "svgImage": {
-      "link": "https://raw.githubusercontent.com/mastroalex/m2m/main/assets/imgs/drawing.svg",
-      "cssLink": "https://raw.githubusercontent.com/mastroalex/m2m/main/assets/svg-css-test.css"
+      "link": "https://raw.githubusercontent.com/mastroalex/m2m/main/assets/imgs/drawing.svg"
     }
   },
     "sections": [
