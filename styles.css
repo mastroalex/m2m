@@ -112,6 +112,12 @@ body, html {
     object-fit: cover;
     display: block;
     margin: auto;
+    position: relative; /* Ensure it's positioned to allow z-index to take effect */
+    z-index: 5; /* Adjust this value to ensure it is above other elements */
+}
+
+.media {
+    pointer-events: auto;
 }
 
 .scrolling-part .media .generic-content {
