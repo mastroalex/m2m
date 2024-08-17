@@ -297,7 +297,7 @@ body, html {
 }
 
 #main-section-svg svg .ellipse:hover {
-    stroke-width: 0.8;
+    stroke-width: 0.8!important;
 }
 
 #main-section-svg svg .formula:hover path{
