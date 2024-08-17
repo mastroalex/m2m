@@ -118,6 +118,7 @@ body, html {
 
 .media {
     pointer-events: auto;
+    z-index: 10;
 }
 
 .scrolling-part .media .generic-content {
