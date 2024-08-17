@@ -71,75 +71,79 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-    function initializeScrollSection(sectionId) {
-        const scrollSection = document.querySelector(`#${sectionId}`);
-        const scrollContent = scrollSection.querySelector('.scroll-content');
-        const contents = scrollContent.querySelectorAll('.scrolling-part');
-
-        let index = 0;
-        let scrollCounter = 0;
-        const scrollThreshold = 20; // Adjust as needed to make the scroll less sensitive
-
-        scrollSection.addEventListener('wheel', (event) => {
-            event.preventDefault();
-
-            // Update scroll counter based on scroll direction
-            scrollCounter += event.deltaY;
-
-            if (scrollCounter > scrollThreshold) {
-                // Scroll down
-                index = (index + 1) % contents.length;
-                scrollContent.style.transform = `translateX(-${index * 100}vw)`;
-                scrollCounter = 0; // Reset counter
-            } else if (scrollCounter < -scrollThreshold) {
-                // Scroll up
-                index = (index - 1 + contents.length) % contents.length;
-                scrollContent.style.transform = `translateX(-${index * 100}vw)`;
-                scrollCounter = 0; // Reset counter
+        function initializeScrollSection(sectionId) {
+            const scrollSection = document.querySelector(`#${sectionId}`);
+            const scrollContent = scrollSection.querySelector('.scroll-content');
+            const contents = scrollContent.querySelectorAll('.scrolling-part');
+            const dots = scrollSection.querySelectorAll('.pagination-dots .dot');
+    
+            let index = 0;
+            let scrollCounter = 0;
+            const scrollThreshold = 20; // Adjust as needed to make the scroll less sensitive
+    
+            function updateDots(currentIndex) {
+                dots.forEach((dot, i) => {
+                    if (i === currentIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
             }
-        });
-
-        // Handle touch events for mobile
-        let touchStartX = 0;
-
-        scrollSection.addEventListener('touchstart', (event) => {
-            touchStartX = event.touches[0].clientX;
-        });
-
-        scrollSection.addEventListener('touchmove', (event) => {
-            const touchEndX = event.touches[0].clientX;
-            const touchDeltaX = touchStartX - touchEndX;
-
-            if (touchDeltaX > scrollThreshold) {
-                // Swipe left
-                index = (index + 1) % contents.length;
-                scrollContent.style.transform = `translateX(-${index * 100}vw)`;
-                touchStartX = touchEndX; // Reset touch start
-            } else if (touchDeltaX < -scrollThreshold) {
-                // Swipe right
-                index = (index - 1 + contents.length) % contents.length;
-                scrollContent.style.transform = `translateX(-${index * 100}vw)`;
-                touchStartX = touchEndX; // Reset touch start
-            }
-        });
-    }
-
-    // Initialize all scroll sections
-    initializeScrollSection('scroll-section-1');
-    initializeScrollSection('scroll-section-2');
-    initializeScrollSection('scroll-section-3');
-});
-
-const scrollSections = document.querySelectorAll('.scroll-section');
-
-scrollSections.forEach(section => {
-    const dots = section.querySelectorAll('.dot');
-    const scrollContent = section.querySelector('.scroll-content');
-    scrollContent.addEventListener('scroll', () => {
-        const scrollPosition = scrollContent.scrollLeft;
-        const totalWidth = scrollContent.scrollWidth - scrollContent.clientWidth;
-        const index = Math.round(scrollPosition / totalWidth * (dots.length - 1));
-        dots.forEach(dot => dot.classList.remove('active'));
-        dots[index].classList.add('active');
+    
+            scrollSection.addEventListener('wheel', (event) => {
+                event.preventDefault();
+    
+                // Update scroll counter based on scroll direction
+                scrollCounter += event.deltaY;
+    
+                if (scrollCounter > scrollThreshold) {
+                    // Scroll down
+                    index = (index + 1) % contents.length;
+                    scrollContent.style.transform = `translateX(-${index * 100}vw)`;
+                    scrollCounter = 0; // Reset counter
+                    updateDots(index);
+                } else if (scrollCounter < -scrollThreshold) {
+                    // Scroll up
+                    index = (index - 1 + contents.length) % contents.length;
+                    scrollContent.style.transform = `translateX(-${index * 100}vw)`;
+                    scrollCounter = 0; // Reset counter
+                    updateDots(index);
+                }
+            });
+    
+            // Handle touch events for mobile
+            let touchStartX = 0;
+    
+            scrollSection.addEventListener('touchstart', (event) => {
+                touchStartX = event.touches[0].clientX;
+            });
+    
+            scrollSection.addEventListener('touchmove', (event) => {
+                const touchEndX = event.touches[0].clientX;
+                const touchDeltaX = touchStartX - touchEndX;
+    
+                if (touchDeltaX > scrollThreshold) {
+                    // Swipe left
+                    index = (index + 1) % contents.length;
+                    scrollContent.style.transform = `translateX(-${index * 100}vw)`;
+                    touchStartX = touchEndX; // Reset touch start
+                    updateDots(index);
+                } else if (touchDeltaX < -scrollThreshold) {
+                    // Swipe right
+                    index = (index - 1 + contents.length) % contents.length;
+                    scrollContent.style.transform = `translateX(-${index * 100}vw)`;
+                    touchStartX = touchEndX; // Reset touch start
+                    updateDots(index);
+                }
+            });
+    
+            // Initialize dots
+            updateDots(index);
+        }
+    
+        // Initialize all scroll sections
+        initializeScrollSection('scroll-section-1');
+        initializeScrollSection('scroll-section-2');
+        initializeScrollSection('scroll-section-3');
     });
-});
