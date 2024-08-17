@@ -49,15 +49,27 @@ document.addEventListener('DOMContentLoaded', () => {
     function applyAnimations() {
         // Example animation for elements with the 'formula' class inside the SVG
         gsap.fromTo(".formula", 
-            {duration: 1.5,
-                opacity: 0,
-                scale: 0.5,
-                ease: "bounce.out",
-                stagger: 0.2 // Staggers the start of each element's animation by 0.2 seconds
+            {
+                opacity: 0,          // Start fully transparent
+                scale: 0.5,          // Start at half the size
+                rotation: 0,         // Start with no rotation
+                x: -100,             // Start 100px to the left
+                y: -100              // Start 100px above
+            }, 
+            {
+                duration: 3,         // Animation duration of 3 seconds
+                opacity: 1,          // End fully opaque
+                scale: 1,            // End at full size
+                rotation: 360,       // End with a full 360-degree rotation
+                x: 0,                // End at the original x position
+                y: 0,                // End at the original y position
+                ease: "elastic.out", // Elastic easing for a bounce effect
+                repeat: -1,          // Infinite loop
+                yoyo: true           // Reverse the animation on every alternate cycle
             }
         );
-        
-        // Add more animations for other SVG elements if needed
+
+        // Add animations for elements with the 'ellipse' class inside the SVG
         gsap.from(".ellipse", {
             duration: 1.5,
             opacity: 0,
@@ -66,45 +78,52 @@ document.addEventListener('DOMContentLoaded', () => {
             stagger: 0.2 // Staggers the start of each element's animation by 0.2 seconds
         });
 
-        // Hover event to show journal on ellipse hover
+        // Create a clickable journal that appears on hover over the ellipse
+        const journalDiv = document.createElement('div');
+        journalDiv.classList.add('journal-popup');
+        document.body.appendChild(journalDiv);
+
+        gsap.set(journalDiv, {
+            width: '200px',
+            height: '300px',
+            backgroundImage: 'url("https://images.unsplash.com/photo-1579127586892-3c877fd5a1cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDJ8fGpvYXJuYWx8ZW58MHx8fHwxNjEyNzk0OTg0&ixlib=rb-1.2.1&q=80&w=400")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            position: 'absolute',
+            top: '50%',
+            left: '75%',
+            x: '-50%',
+            y: '-50%',
+            opacity: 0,
+            boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.3)',
+            cursor: 'pointer',
+            zIndex: 10
+        });
+
+        // Animation to show the journal on hover over the ellipse
         document.querySelectorAll('.ellipse').forEach(ellipse => {
-            ellipse.addEventListener('mouseenter', showJournal);
-            ellipse.addEventListener('mouseleave', hideJournal);
-        });
-    }
+            ellipse.addEventListener('mouseenter', () => {
+                gsap.to(journalDiv, {
+                    duration: 1,
+                    opacity: 1,
+                    scale: 1.1,
+                    ease: "power1.out"
+                });
+            });
 
-    // Function to show the journal on hover
-    function showJournal() {
-        // Set the journal to be initially off-screen
-        gsap.set("#journal-container", { display: 'block', x: '150%', opacity: 0, rotateY: -90 });
-        
-        // Animate the journal container to slide in from the right and rotate open
-        gsap.to("#journal-container", {
-            duration: 1.5,
-            x: '50%',        // Move to the center of the right half of the screen
-            opacity: 1,      // Fade in
-            rotateY: 0,      // Rotate to show the front face
-            ease: "power2.out",
-            boxShadow: '10px 10px 20px rgba(0, 0, 0, 0.5)', // Adding a shadow for depth
+            ellipse.addEventListener('mouseleave', () => {
+                gsap.to(journalDiv, {
+                    duration: 1,
+                    opacity: 0,
+                    scale: 1,
+                    ease: "power1.out"
+                });
+            });
         });
 
-        // Add click event to open a link in a new page
-        document.getElementById('journal-container').addEventListener('click', function() {
-            window.open('https://your-link-here.com', '_blank'); // Opens link in a new tab
-        });
-    }
-
-    // Function to hide the journal on mouse leave
-    function hideJournal() {
-        gsap.to("#journal-container", {
-            duration: 1,
-            x: '150%',      // Move back off-screen
-            opacity: 0,     // Fade out
-            rotateY: -90,   // Rotate back to hide the front face
-            ease: "power2.in",
-            onComplete: () => {
-                gsap.set("#journal-container", { display: 'none' });
-            }
+        // Add click event to the journalDiv to open a link
+        journalDiv.addEventListener('click', () => {
+            window.open('https://example.com', '_blank'); // Replace with your desired URL
         });
     }
 });
