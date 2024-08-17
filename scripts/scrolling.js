@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(jsonUrl)
         .then(response => response.json())
         .then(data => {
-            // Load the main section SVG and CSS
+            // Load the main section SVG
             const mainSectionSvgContainer = document.getElementById('main-section-svg');
 
             // Load the SVG
@@ -20,12 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(response => response.text())
                 .then(svgData => {
                     mainSectionSvgContainer.innerHTML = svgData;
-
-                    // Load the associated CSS
-                    const svgStylesheet = document.createElement('link');
-                    svgStylesheet.rel = 'stylesheet';
-                    svgStylesheet.href = data.mainSection.svgImage.cssLink;
-                    document.head.appendChild(svgStylesheet);
                 })
                 .catch(error => console.error('Error loading SVG:', error));
 
