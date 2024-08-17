@@ -66,8 +66,12 @@ document.addEventListener('DOMContentLoaded', () => {
             stagger: 0.2
         });
 
+        let hideJournalTimeout;
+
         function showJournal() {
+            clearTimeout(hideJournalTimeout);  // Clear any pending timeout
             const journalContainer = document.querySelector('#journal-container');
+            const journalImage = document.querySelector('#journal-image');
             if (journalContainer) {
                 gsap.to(journalContainer, {
                     duration: 1,
@@ -79,21 +83,31 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
             }
+
+            if (journalImage) {
+                gsap.to(journalImage, {
+                    duration: 1,
+                    rotationY: 0,
+                    ease: "power2.inOut"
+                });
+            }
         }
 
         function hideJournal() {
-            const journalContainer = document.querySelector('#journal-container');
-            if (journalContainer) {
-                gsap.to(journalContainer, {
-                    duration: 1,
-                    opacity: 0,
-                    rotationY: -90,
-                    ease: "power1.out",
-                    onComplete: () => {
-                        journalContainer.style.display = 'none';
-                    }
-                });
-            }
+            hideJournalTimeout = setTimeout(() => {
+                const journalContainer = document.querySelector('#journal-container');
+                if (journalContainer) {
+                    gsap.to(journalContainer, {
+                        duration: 1,
+                        opacity: 0,
+                        rotationY: -90,
+                        ease: "power1.out",
+                        onComplete: () => {
+                            journalContainer.style.display = 'none';
+                        }
+                    });
+                }
+            }, 3000);  // Wait 3 seconds before hiding the journal
         }
 
         const ellipseElements = document.querySelectorAll(".ellipse");
