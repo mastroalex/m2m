@@ -1,7 +1,6 @@
 // svgAnimate.js
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Function to get JSON URL from the query parameter
     function getJsonUrlFromUrl() {
         const urlParams = new URLSearchParams(window.location.search);
         const jsonUrl = urlParams.get('jsonurl');
@@ -38,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.error('Error fetching JSON:', error));
 
     function applyAnimations() {
-        // GSAP animations for formula and ellipse elements
         gsap.fromTo(".formula", 
             {
                 opacity: 0,
@@ -68,14 +66,13 @@ document.addEventListener('DOMContentLoaded', () => {
             stagger: 0.2
         });
 
-        // Function to show the journal on hover
         function showJournal() {
-            const journalContainer = document.querySelector('.journal-container');
+            const journalContainer = document.querySelector('#journal-container');
             if (journalContainer) {
                 gsap.to(journalContainer, {
                     duration: 1,
                     opacity: 1,
-                    rotationY: 180,
+                    rotationY: 0,
                     ease: "power2.inOut",
                     onStart: () => {
                         journalContainer.style.display = 'block';
@@ -84,14 +81,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Function to hide the journal on mouse leave
         function hideJournal() {
-            const journalContainer = document.querySelector('.journal-container');
+            const journalContainer = document.querySelector('#journal-container');
             if (journalContainer) {
                 gsap.to(journalContainer, {
                     duration: 1,
                     opacity: 0,
-                    rotationY: 0,
+                    rotationY: -90,
                     ease: "power1.out",
                     onComplete: () => {
                         journalContainer.style.display = 'none';
@@ -100,7 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Add hover event to show journal on ellipse hover
         const ellipseElements = document.querySelectorAll(".ellipse");
 
         if (ellipseElements.length > 0) {
@@ -110,11 +105,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Add click event to the journalContainer to open a link
-        const journalContainer = document.querySelector('.journal-container');
+        const journalContainer = document.querySelector('#journal-container');
         if (journalContainer) {
             journalContainer.addEventListener('click', () => {
-                window.open('https://example.com', '_blank'); // Replace with your desired URL
+                window.open('https://example.com', '_blank');
             });
         }
     }
