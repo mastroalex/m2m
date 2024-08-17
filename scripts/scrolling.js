@@ -129,3 +129,17 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeScrollSection('scroll-section-2');
     initializeScrollSection('scroll-section-3');
 });
+
+const scrollSections = document.querySelectorAll('.scroll-section');
+
+scrollSections.forEach(section => {
+    const dots = section.querySelectorAll('.dot');
+    const scrollContent = section.querySelector('.scroll-content');
+    scrollContent.addEventListener('scroll', () => {
+        const scrollPosition = scrollContent.scrollLeft;
+        const totalWidth = scrollContent.scrollWidth - scrollContent.clientWidth;
+        const index = Math.round(scrollPosition / totalWidth * (dots.length - 1));
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[index].classList.add('active');
+    });
+});
