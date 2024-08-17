@@ -297,10 +297,10 @@ body, html {
 }
 
 #main-section-svg svg .ellipse:hover {
-    stroke-width: 0.3;
+    stroke-width: 0.8;
 }
 
-#main-section-svg svg .formula:hover {
+#main-section-svg svg .formula:hover path{
     fill: #ff0000;
 
 }
