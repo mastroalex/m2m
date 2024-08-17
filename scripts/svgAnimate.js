@@ -47,15 +47,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to apply GSAP animations
     function applyAnimations() {
-        const ellipseElements = document.querySelectorAll(".ellipse");
+        // Example animation for elements with the 'formula' class inside the SVG
+        gsap.fromTo(".formula", 
+            {duration: 1.5,
+                opacity: 0,
+                scale: 0.5,
+                ease: "bounce.out",
+                stagger: 0.2 // Staggers the start of each element's animation by 0.2 seconds
+            }
+        );
+        
+        // Add more animations for other SVG elements if needed
+        gsap.from(".ellipse", {
+            duration: 1.5,
+            opacity: 0,
+            scale: 0.5,
+            ease: "bounce.out",
+            stagger: 0.2 // Staggers the start of each element's animation by 0.2 seconds
+        });
 
-        if (ellipseElements.length > 0) {
-            // Add hover event to show journal on ellipse hover
-            ellipseElements.forEach(ellipse => {
-                ellipse.addEventListener('mouseenter', showJournal);
-                ellipse.addEventListener('mouseleave', hideJournal);
-            });
-        }
+        // Hover event to show journal on ellipse hover
+        document.querySelectorAll('.ellipse').forEach(ellipse => {
+            ellipse.addEventListener('mouseenter', showJournal);
+            ellipse.addEventListener('mouseleave', hideJournal);
+        });
     }
 
     // Function to show the journal on hover
