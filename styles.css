@@ -292,11 +292,11 @@ body, html {
     object-fit: contain; /* Ensure SVG scales to fit the container */
 }
 
-#main-section-svg svg .circle {
+#main-section-svg svg .ellipse {
     fill: red;
     transition: fill 0.3s ease-in-out;
 }
 
-#main-section-svg svg .circle:hover {
+#main-section-svg svg .ellipse:hover {
     fill: blue;
 }
