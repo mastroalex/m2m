@@ -63,6 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // Add event listeners to stop scroll propagation on canvas elements
             document.querySelectorAll('.scrolling-part .media canvas').forEach(canvas => {
                 canvas.addEventListener('wheel', (event) => {
+                    if (!event.target.closest('.media')) {
+                        event.preventDefault();
+                    }
                     event.stopPropagation();
                 });
                 canvas.addEventListener('touchmove', (event) => {
