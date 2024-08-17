@@ -248,6 +248,7 @@ body, html {
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
+    transition: background-color 0.3s;
 }
 
 .dot.active {
