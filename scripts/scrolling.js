@@ -12,31 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(jsonUrl)
         .then(response => response.json())
         .then(data => {
-            // Load the main section SVG
-            const mainSectionSvgContainer = document.getElementById('main-section-svg');
-
-            // Load the SVG
-            fetch(data.mainSection.svgImage.link)
-                .then(response => response.text())
-                .then(svgData => {
-                    mainSectionSvgContainer.innerHTML = svgData;
-
-                    // Get the SVG element after it's inserted into the DOM
-                    const svgElement = mainSectionSvgContainer.querySelector('svg');
-                    if (svgElement) {
-                        svgElement.setAttribute('width', '100%');
-                        svgElement.setAttribute('height', '100%');
-                        svgElement.style.maxWidth = '100%';
-                        svgElement.style.maxHeight = '100%';
-                        svgElement.style.display = 'block';
-                        svgElement.style.objectFit = 'contain'; // Or 'cover', depending on your needs
-
-                        // Optional: Ensure the SVG scales properly within the viewBox
-                        svgElement.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-                    }
-                })
-                .catch(error => console.error('Error loading SVG:', error));
-
             // Load the scroll sections and content
             data.sections.forEach(section => {
                 const scrollSection = document.querySelector(`#${section.id}`);
