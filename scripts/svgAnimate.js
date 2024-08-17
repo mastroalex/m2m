@@ -47,45 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to apply GSAP animations
     function applyAnimations() {
-        // Ensure that the SVG elements exist before trying to animate them
-        const formulaElements = document.querySelectorAll(".formula");
         const ellipseElements = document.querySelectorAll(".ellipse");
 
-        if (formulaElements.length > 0) {
-            // Example animation for elements with the 'formula' class inside the SVG
-            gsap.fromTo(formulaElements, 
-                {
-                    opacity: 0,          // Start fully transparent
-                    scale: 0.5,          // Start at half the size
-                    rotation: 0,         // Start with no rotation
-                    x: -100,             // Start 100px to the left
-                    y: -100              // Start 100px above
-                }, 
-                {
-                    duration: 3,         // Animation duration of 3 seconds
-                    opacity: 1,          // End fully opaque
-                    scale: 1,            // End at full size
-                    rotation: 360,       // End with a full 360-degree rotation
-                    x: 0,                // End at the original x position
-                    y: 0,                // End at the original y position
-                    ease: "elastic.out", // Elastic easing for a bounce effect
-                    repeat: -1,          // Infinite loop
-                    yoyo: true           // Reverse the animation on every alternate cycle
-                }
-            );
-        }
-
         if (ellipseElements.length > 0) {
-            // Add more animations for other SVG elements if needed
-            gsap.from(ellipseElements, {
-                duration: 1.5,
-                opacity: 0,
-                scale: 0.5,
-                ease: "bounce.out",
-                stagger: 0.2 // Staggers the start of each element's animation by 0.2 seconds
-            });
-
-            // Hover event to show journal on ellipse hover
+            // Add hover event to show journal on ellipse hover
             ellipseElements.forEach(ellipse => {
                 ellipse.addEventListener('mouseenter', showJournal);
                 ellipse.addEventListener('mouseleave', hideJournal);
@@ -95,22 +60,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to show the journal on hover
     function showJournal() {
-        // Show the journal container
-        gsap.set("#journal-container", { display: 'block', opacity: 0 });
+        // Set the journal to be initially off-screen
+        gsap.set("#journal-container", { display: 'block', x: '150%', opacity: 0, rotateY: -90 });
         
-        // Animate the journal container to make it appear
+        // Animate the journal container to slide in from the right and rotate open
         gsap.to("#journal-container", {
-            duration: 2,
-            opacity: 1, // Fade in
-            ease: "power2.inOut",
-        });
-
-        // Flip the journal to reveal the paper
-        gsap.to("#journal-image", {
             duration: 1.5,
-            delay: 1, // Wait for the container to fully appear before flipping
-            rotateY: 0, // Flip to show the paper
-            ease: "power3.out",
+            x: '50%',        // Move to the center of the right half of the screen
+            opacity: 1,      // Fade in
+            rotateY: 0,      // Rotate to show the front face
+            ease: "power2.out",
+            boxShadow: '10px 10px 20px rgba(0, 0, 0, 0.5)', // Adding a shadow for depth
         });
 
         // Add click event to open a link in a new page
@@ -122,9 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to hide the journal on mouse leave
     function hideJournal() {
         gsap.to("#journal-container", {
-            duration: 0.5,
-            opacity: 0,
-            ease: "power2.inOut",
+            duration: 1,
+            x: '150%',      // Move back off-screen
+            opacity: 0,     // Fade out
+            rotateY: -90,   // Rotate back to hide the front face
+            ease: "power2.in",
             onComplete: () => {
                 gsap.set("#journal-container", { display: 'none' });
             }
