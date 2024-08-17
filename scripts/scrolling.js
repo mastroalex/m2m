@@ -69,6 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     event.stopPropagation();
                 });
                 canvas.addEventListener('touchmove', (event) => {
+                    if (!event.target.closest('.media')) {
+                        event.preventDefault();
+                    }
                     event.stopPropagation();
                 });
             });
