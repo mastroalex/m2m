@@ -293,10 +293,14 @@ body, html {
 }
 
 #main-section-svg svg .ellipse {
-    fill: red;
     transition: fill 0.3s ease-in-out;
 }
 
 #main-section-svg svg .ellipse:hover {
-    fill: blue;
+    stroke-width: 0.3;
+}
+
+#main-section-svg svg .formula:hover {
+    fill: #ff0000;
+
 }
