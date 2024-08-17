@@ -49,23 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function applyAnimations() {
         // Example animation for elements with the 'formula' class inside the SVG
         gsap.fromTo(".formula", 
-            {
-                opacity: 0,          // Start fully transparent
-                scale: 0.5,          // Start at half the size
-                rotation: 0,         // Start with no rotation
-                x: -100,             // Start 100px to the left
-                y: -100              // Start 100px above
-            }, 
-            {
-                duration: 3,         // Animation duration of 3 seconds
-                opacity: 1,          // End fully opaque
-                scale: 1,            // End at full size
-                rotation: 360,       // End with a full 360-degree rotation
-                x: 0,                // End at the original x position
-                y: 0,                // End at the original y position
-                ease: "elastic.out", // Elastic easing for a bounce effect
-                repeat: -1,          // Infinite loop
-                yoyo: true           // Reverse the animation on every alternate cycle
+            {duration: 1.5,
+                opacity: 0,
+                scale: 0.5,
+                ease: "bounce.out",
+                stagger: 0.2 // Staggers the start of each element's animation by 0.2 seconds
             }
         );
         
@@ -76,6 +64,50 @@ document.addEventListener('DOMContentLoaded', () => {
             scale: 0.5,
             ease: "bounce.out",
             stagger: 0.2 // Staggers the start of each element's animation by 0.2 seconds
+        });
+
+        // Hover event to show journal on ellipse hover
+        document.querySelectorAll('.ellipse').forEach(ellipse => {
+            ellipse.addEventListener('mouseenter', showJournal);
+            ellipse.addEventListener('mouseleave', hideJournal);
+        });
+    }
+
+    // Function to show the journal on hover
+    function showJournal() {
+        // Show the journal container
+        gsap.set("#journal-container", { display: 'block', opacity: 0 });
+        
+        // Animate the journal container to make it appear
+        gsap.to("#journal-container", {
+            duration: 2,
+            opacity: 1, // Fade in
+            ease: "power2.inOut",
+        });
+
+        // Flip the journal to reveal the paper
+        gsap.to("#journal-image", {
+            duration: 1.5,
+            delay: 1, // Wait for the container to fully appear before flipping
+            rotateY: 0, // Flip to show the paper
+            ease: "power3.out",
+        });
+
+        // Add click event to open a link in a new page
+        document.getElementById('journal-container').addEventListener('click', function() {
+            window.open('https://your-link-here.com', '_blank'); // Opens link in a new tab
+        });
+    }
+
+    // Function to hide the journal on mouse leave
+    function hideJournal() {
+        gsap.to("#journal-container", {
+            duration: 0.5,
+            opacity: 0,
+            ease: "power2.inOut",
+            onComplete: () => {
+                gsap.set("#journal-container", { display: 'none' });
+            }
         });
     }
 });
