@@ -48,16 +48,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to apply GSAP animations
     function applyAnimations() {
         // Example animation for elements with the 'formula' class inside the SVG
-        gsap.to(".formula", {
-            duration: 2,
-            x: 100,
-            y: 50,
-            rotation: 360,
-            scale: 1.5,
-            ease: "power1.inOut", // Ease function for smooth animation
-            repeat: -1, // Makes the animation loop infinitely
-            yoyo: true  // Makes the animation reverse on every alternate cycle
-        });
+        gsap.fromTo(".formula", 
+            {
+                opacity: 0,          // Start fully transparent
+                scale: 0.5,          // Start at half the size
+                rotation: 0,         // Start with no rotation
+                x: -100,             // Start 100px to the left
+                y: -100              // Start 100px above
+            }, 
+            {
+                duration: 3,         // Animation duration of 3 seconds
+                opacity: 1,          // End fully opaque
+                scale: 1,            // End at full size
+                rotation: 360,       // End with a full 360-degree rotation
+                x: 0,                // End at the original x position
+                y: 0,                // End at the original y position
+                ease: "elastic.out", // Elastic easing for a bounce effect
+                repeat: -1,          // Infinite loop
+                yoyo: true           // Reverse the animation on every alternate cycle
+            }
+        );
         
         // Add more animations for other SVG elements if needed
         gsap.from(".ellipse", {
