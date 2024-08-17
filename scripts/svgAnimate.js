@@ -47,30 +47,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to apply GSAP animations
     function applyAnimations() {
-        // Example animation for elements with the 'formula' class inside the SVG
-        gsap.fromTo(".formula", 
-            {duration: 1.5,
+        // Ensure that the SVG elements exist before trying to animate them
+        const formulaElements = document.querySelectorAll(".formula");
+        const ellipseElements = document.querySelectorAll(".ellipse");
+
+        if (formulaElements.length > 0) {
+            // Example animation for elements with the 'formula' class inside the SVG
+            gsap.fromTo(formulaElements, 
+                {
+                    opacity: 0,          // Start fully transparent
+                    scale: 0.5,          // Start at half the size
+                    rotation: 0,         // Start with no rotation
+                    x: -100,             // Start 100px to the left
+                    y: -100              // Start 100px above
+                }, 
+                {
+                    duration: 3,         // Animation duration of 3 seconds
+                    opacity: 1,          // End fully opaque
+                    scale: 1,            // End at full size
+                    rotation: 360,       // End with a full 360-degree rotation
+                    x: 0,                // End at the original x position
+                    y: 0,                // End at the original y position
+                    ease: "elastic.out", // Elastic easing for a bounce effect
+                    repeat: -1,          // Infinite loop
+                    yoyo: true           // Reverse the animation on every alternate cycle
+                }
+            );
+        }
+
+        if (ellipseElements.length > 0) {
+            // Add more animations for other SVG elements if needed
+            gsap.from(ellipseElements, {
+                duration: 1.5,
                 opacity: 0,
                 scale: 0.5,
                 ease: "bounce.out",
                 stagger: 0.2 // Staggers the start of each element's animation by 0.2 seconds
-            }
-        );
-        
-        // Add more animations for other SVG elements if needed
-        gsap.from(".ellipse", {
-            duration: 1.5,
-            opacity: 0,
-            scale: 0.5,
-            ease: "bounce.out",
-            stagger: 0.2 // Staggers the start of each element's animation by 0.2 seconds
-        });
+            });
 
-        // Hover event to show journal on ellipse hover
-        document.querySelectorAll('.ellipse').forEach(ellipse => {
-            ellipse.addEventListener('mouseenter', showJournal);
-            ellipse.addEventListener('mouseleave', hideJournal);
-        });
+            // Hover event to show journal on ellipse hover
+            ellipseElements.forEach(ellipse => {
+                ellipse.addEventListener('mouseenter', showJournal);
+                ellipse.addEventListener('mouseleave', hideJournal);
+            });
+        }
     }
 
     // Function to show the journal on hover
