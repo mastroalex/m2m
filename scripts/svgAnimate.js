@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         rotationY: -90,
                         ease: "power1.out",
                         onComplete: () => {
-                            journalContainer.style.display = 'none';
+                            //journalContainer.style.display = 'none';
                         }
                     });
                 }
