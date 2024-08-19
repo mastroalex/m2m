@@ -323,7 +323,7 @@ body, html {
     transform-style: preserve-3d;
     perspective: 1000px;
     cursor: pointer;
-    display: none; /* Hidden by default */
+    display: block; /* Hidden by default */
 }
 
 #journal-image {
