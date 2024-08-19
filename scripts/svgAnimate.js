@@ -74,19 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const journalImage = document.querySelector('#journal-image');
             
             if (journalContainer) {
-                // Position the journal-container based on the svgElement size and position
-                const svgRect = svgElement.getBoundingClientRect();
-                const journalWidth = journalContainer.offsetWidth;
-                const journalHeight = journalContainer.offsetHeight;
                 
-                // Calculate the desired position
-                const leftPosition = svgRect.left + svgRect.width * 0.75 - journalWidth / 2;
-                const topPosition = svgRect.top + svgRect.height / 2 - journalHeight / 2;
-                
-                // Apply the calculated position
-                //journalContainer.style.position = 'absolute';
-                //journalContainer.style.left = `${leftPosition}px`;
-                //journalContainer.style.top = `${topPosition}px`;
 
                 gsap.to(journalContainer, {
                     duration: 1,
