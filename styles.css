@@ -312,7 +312,7 @@ body, html {
 #journal-container {
     position: absolute;
     /*top: 50%;*/
-    left: 75%;
+    left: 70%;
     /*transform: translate(50%, -50%);*/
     width: 200px;
     height: 300px;
@@ -324,7 +324,7 @@ body, html {
     transform-style: preserve-3d;
     perspective: 1000px;
     cursor: pointer;
-    display: block; /* Hidden by default */
+    display: none; /* Hidden by default */
     z-index: 2;
 }
 
