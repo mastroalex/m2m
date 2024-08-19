@@ -117,8 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (ellipseElements.length > 0) {
             ellipseElements.forEach(ellipse => {
-                //ellipse.addEventListener('mouseenter', showJournal);
-                //ellipse.addEventListener('mouseleave', hideJournal);
+                ellipse.addEventListener('mouseenter', showJournal);
+                ellipse.addEventListener('mouseleave', hideJournal);
             });
         }
 
