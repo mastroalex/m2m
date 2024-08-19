@@ -190,14 +190,14 @@ body, html {
     
     .fixed-part .subtitle {
         font-size: 1.2em;
-        margin-left: 10px;
+        /*margin-left: 10px;*/
         margin-top: 5px;
     }
 
     .left-content .text {
         width: 100%;
         padding-left: 0px;
-        margin: 50px;
+        margin-top: 50px;
         box-sizing: border-box;
         font-size: 1em;
         text-align: center;
