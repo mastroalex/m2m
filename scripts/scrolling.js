@@ -12,6 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(jsonUrl)
         .then(response => response.json())
         .then(data => {
+
+            const mainSection = document.querySelector('.main-section');
+            if (mainSection && data.mainSection) {
+                const textElement = mainSection.querySelector('.text');
+                if (textElement) {
+                    textElement.textContent = data.mainSection.Text; // Set the text content
+                }
+            }
             // Load the scroll sections and content
             data.sections.forEach(section => {
                 const scrollSection = document.querySelector(`#${section.id}`);

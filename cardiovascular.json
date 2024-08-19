@@ -2,7 +2,8 @@
   "mainSection": {
     "svgImage": {
       "link": "https://raw.githubusercontent.com/mastroalex/m2m/main/assets/imgs/drawing.svg"
-    }
+    },
+    "Text": "TESTO DI PROVA"
   },
     "sections": [
       {
