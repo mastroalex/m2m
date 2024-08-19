@@ -293,6 +293,7 @@ body, html {
     max-height: 100%;
     display: block;
     object-fit: contain; /* Ensure SVG scales to fit the container */
+    z-index: 1;  /* Ensure SVG is above other content */
 }
 
 #main-section-svg svg .ellipse {
@@ -309,10 +310,10 @@ body, html {
 }
 
 #journal-container {
-    position: absolute;
-    top: 50%;
-    right: 25%;
-    /*transform: translate(50%, -50%);*/
+    position: relative;
+    /*top: 50%;*/
+    left: 50%;
+    transform: translate(50%, -50%);
     width: 200px;
     height: 300px;
     background-image: url('https://via.placeholder.com/200x300.png?text=Journal+Cover');
@@ -324,6 +325,7 @@ body, html {
     perspective: 1000px;
     cursor: pointer;
     display: block; /* Hidden by default */
+    z-index: 2;
 }
 
 #journal-image {
