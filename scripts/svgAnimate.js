@@ -84,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const topPosition = svgRect.top + svgRect.height / 2 - journalHeight / 2;
                 
                 // Apply the calculated position
+                journalContainer.style.position = 'absolute';
                 journalContainer.style.left = `${leftPosition}px`;
                 journalContainer.style.top = `${topPosition}px`;
 
