@@ -310,9 +310,9 @@ body, html {
 }
 
 #journal-container {
-    position: relative;
+    position: absolute;
     /*top: 50%;*/
-    left: -10%;
+    left: 75%;
     /*transform: translate(50%, -50%);*/
     width: 200px;
     height: 300px;
