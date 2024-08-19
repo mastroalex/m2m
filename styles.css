@@ -138,6 +138,7 @@ body, html {
     display: block;
     margin: auto;
     background-color: transparent; /* Remove background color if any */
+    outline: none; /* Remove the default focus outline */
 }   
 
 .scrolling-part .media .chartjs-canvas canvas{
