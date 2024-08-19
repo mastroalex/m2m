@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const mainText = document.querySelector('.main-text');
             if (mainText) {
-                textElement.textContent = data.mainSection.Text; // Set the text content
+                mainText.textContent = data.mainSection.Text; // Set the text content
             }
             // Load the scroll sections and content
             data.sections.forEach(section => {
