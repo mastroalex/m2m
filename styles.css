@@ -335,3 +335,11 @@ body, html {
     transform: rotateY(-90deg); /* Start with a rotated view */
     transition: transform 0.8s ease-in-out;
 }
+
+
+.main-text {
+    font-size: 1.3em;
+    font-weight: normal;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
