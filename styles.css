@@ -369,7 +369,7 @@ html {
     /* Ensure SVG is above other content */
 }
 
-#main-section-svg svg .zoom-crop {
+#main-section-svg svg .zoom-crop, .paper1, .paper2, .paper3 {
     cursor: pointer;
 }
 
