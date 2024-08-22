@@ -119,32 +119,38 @@ document.addEventListener('DOMContentLoaded', () => {
             clearTimeout(hideJournalTimeout);  // Clear any pending timeout
             const journalContainer = document.querySelector('#journal-container');
             const journalImage = document.querySelector('#journal-image');
-            
-            if (journalContainer) {
-                journalContainer.style.backgroundImage = journal.back;
-                journalContainer.addEventListener('click', () => {
-                    //window.open(data.mainSection.Journal1.link, '_blank');
-                    window.open(journal.link, '_blank');
-                });
-            }
-            if (journalImage) {
-                journalImage.src = journal.front;
-            }
+            let newContainer;
 
             if (journalContainer) {
+                // Update the background image
+                journalContainer.style.backgroundImage = `url(${journal.back})`;
+        
+                // Remove any existing click event listeners by replacing the listener with a new one
+                journalContainer.replaceWith(journalContainer.cloneNode(true));
+                const updatedContainer = document.querySelector('#journal-container');
                 
-                gsap.to(journalContainer, {
+                // Attach the click event listener to the updated container
+                updatedContainer.addEventListener('click', () => {
+                    window.open(journal.link, '_blank');
+                });
+        
+                // Animate the container
+                gsap.to(updatedContainer, {
                     duration: 1,
                     opacity: 1,
                     rotationY: 0,
                     ease: "power2.inOut",
                     onStart: () => {
-                        journalContainer.style.display = 'block';
+                        updatedContainer.style.display = 'block';
                     }
                 });
             }
 
             if (journalImage) {
+                // Update the image source
+                journalImage.src = journal.front;
+        
+                // Animate the image
                 gsap.to(journalImage, {
                     duration: 1,
                     rotationY: 0,
