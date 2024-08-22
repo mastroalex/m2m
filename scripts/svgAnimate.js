@@ -130,7 +130,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const journalContainer = document.querySelector('#journal-container');
         if (journalContainer) {
             journalContainer.addEventListener('click', () => {
-                window.open(data.mainSection.Journal1.link, '_blank');
+                //window.open(data.mainSection.Journal1.link, '_blank');
+                window.open("https://google.it", '_blank');
             });
         }
     }
