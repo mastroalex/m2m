@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
             clearTimeout(hideJournalTimeout);  // Clear any pending timeout
             const journalContainer = document.querySelector('#journal-container');
             const journalImage = document.querySelector('#journal-image');
-            let newContainer;
+
 
             if (journalContainer) {
                 // Update the background image
@@ -144,19 +144,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         updatedContainer.style.display = 'block';
                     }
                 });
+
+                
             }
 
-            if (journalImage) {
-                // Update the image source
-                journalImage.src = journal.front;
-        
-                // Animate the image
-                gsap.to(journalImage, {
-                    duration: 1,
-                    rotationY: 0,
-                    ease: "power2.inOut"
-                });
-            }
+            
         }
 
         function hideJournal() {
