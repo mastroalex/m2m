@@ -369,6 +369,10 @@ html {
     /* Ensure SVG is above other content */
 }
 
+#main-section-svg svg .zoom-crop {
+    cursor: pointer;
+}
+
 #main-section-svg svg .ellipse {
     transition: fill 0.3s ease-in-out;
     cursor: pointer;
@@ -376,6 +380,10 @@ html {
 
 #main-section-svg svg .ellipse:hover {
     stroke-width: 0.8 !important;
+}
+
+#main-section-svg svg .formula {
+    cursor: crosshair;
 }
 
 #main-section-svg svg .formula path {
