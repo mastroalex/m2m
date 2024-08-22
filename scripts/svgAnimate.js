@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const journalImage = document.querySelector('#journal-image');
 
                 gsap.fromTo("#main-section-svg", 
-                    { opacity: 0.3 }, { opacity: 1, duration: 0.8 }
+                    { opacity: 1 }, { opacity: 0.3, duration: 0.8 }
                 );
 
                 updatedContainer.style.opacity = 1;
@@ -171,6 +171,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function hideJournal() {
+            gsap.fromTo("#main-section-svg", 
+                { opacity: 0.3 }, { opacity: 1, duration: 0.8 }
+            );
             hideJournalTimeout = setTimeout(() => {
                 const journalContainer = document.querySelector('#journal-container');
                 if (journalContainer) {
