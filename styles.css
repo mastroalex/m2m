@@ -105,8 +105,11 @@ html {
     /* Ensure they take full height of the scroll-section */
     display: flex;
     justify-content: center;
-    align-items: center;
 }
+
+.right-content {
+    align-items: center;
+    }
 
 .left-content .text {
     width: 100%;
@@ -231,7 +234,7 @@ html {
     .left-content .text {
         width: 100%;
         padding-left: 0px;
-        margin: 50px;
+        margin: 10px;
         box-sizing: border-box;
         font-size: 1em;
         text-align: left;
@@ -284,7 +287,7 @@ html {
     .left-content .text {
         width: 100%;
         padding-left: 0px;
-        margin: 50px;
+        margin: 10px;
         box-sizing: border-box;
         font-size: 4vw;
         text-align: left;
@@ -337,6 +340,13 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@media (max-width: 768px) {
+    #main-section-svg {
+        display: none;
+    }
+    
 }
 
 #main-section-svg svg {
