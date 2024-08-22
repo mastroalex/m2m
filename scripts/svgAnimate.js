@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function applyAnimations(svgElement, journal1, journal2, journal3) {
         gsap.fromTo(".formula", 
-            { opacity: 0 }, { opacity: 0.5, duration: 1 }
+            { opacity: 0 }, { opacity: 1, duration: 1.8 }
         );
 
         gsap.from(".ellipse", {
@@ -135,7 +135,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 
                 const journalImage = document.querySelector('#journal-image');
-                
+
+                gsap.fromTo("main-section-svg", 
+                    { opacity: 0 }, { opacity: 1, duration: 0.8 }
+                );
+
+                updatedContainer.style.opacity = 1;
+                journalImage.style.opacity = 1;
+
                 // Animate the container
                 gsap.to(updatedContainer, {
                     duration: 1,
