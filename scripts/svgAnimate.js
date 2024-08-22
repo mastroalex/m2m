@@ -145,7 +145,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
-                
+                if (journalImage) {
+                    // Update the image source
+                    journalImage.src = journal.front;
+            
+                    // Animate the image
+                    gsap.to(journalImage, {
+                        duration: 1,
+                        rotationY: 0,
+                        ease: "power2.inOut"
+                    });
+                }
             }
 
             
