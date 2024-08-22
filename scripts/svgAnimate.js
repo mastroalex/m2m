@@ -148,13 +148,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 elementsToAnimate.forEach(element => {
                     gsap.fromTo(element, 
                         { opacity: 1 }, 
-                        { opacity: 0.3, duration: 0.8 }
+                        { opacity: 0.5, duration: 0.8 }
                     );
                 });
 
                 // Additionally, ensure elements with paper classes maintain full opacity
                 paperClasses.forEach(paperClass => {
-                    const paperElements = document.querySelectorAll(`#main-section-svg .${paperClass}`);
+                    const paperElements = document.querySelectorAll(`.${paperClass}`);
                     paperElements.forEach(element => {
                         gsap.to(element, { opacity: 1, duration: 0 });
                     });
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Apply the GSAP animation to each selected element
             elementsToAnimate.forEach(element => {
                 gsap.fromTo(element, 
-                    { opacity: 0.3 }, 
+                    { opacity: 0.5 }, 
                     { opacity: 1, duration: 0.1 }
                 );
             });
