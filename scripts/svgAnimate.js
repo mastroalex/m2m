@@ -143,6 +143,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 updatedContainer.style.opacity = 1;
                 journalImage.style.opacity = 1;
 
+                const paperClasses = ['paper1', 'paper2', 'paper3'];
+                // Loop through each paper class and corresponding journal variable
+                paperClasses.forEach((paperClass, index) => {
+                    const journalElements = document.querySelectorAll(`.${paperClass}`);
+
+                    if (journalElements.length > 0) {
+                        journalElements.style.opacity = 1;
+                    }
+                });
+
                 // Animate the container
                 gsap.to(updatedContainer, {
                     duration: 1,
