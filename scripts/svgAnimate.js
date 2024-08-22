@@ -177,6 +177,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (journalImage) {
             // Animate the container
+            updatedContainer.style.zIndex = "3";
+            journalImage.style.zIndex = "4";
+            gsap.set(journalImage, { rotationY: -180, transformOrigin: "left center" });
+
             gsap.to(updatedContainer, {
             duration: 1,
             opacity: 1,
@@ -195,6 +199,12 @@ document.addEventListener("DOMContentLoaded", () => {
             duration: 1,
             rotationY: 0,
             ease: "power2.inOut",
+            transformOrigin: "left center",
+            onComplete: () => {
+            // Ensure the container stays visible behind the flipped image
+            updatedContainer.style.zIndex = "3";
+            journalImage.style.zIndex = "4";
+        }
           });
         }
       }
