@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(jsonUrl)
         .then(response => response.json())
         .then(data => {
-            const mainSectionSvgContainer = document.getElementById('main-section-svg');
+            const mainSectionSvgContainer = document.getElementById('#main-section-svg');
 
             fetch(data.mainSection.svgImage.link)
                 .then(response => response.text())
