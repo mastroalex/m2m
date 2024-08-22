@@ -1,4 +1,5 @@
-body, html {
+body,
+html {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
@@ -24,7 +25,8 @@ body, html {
     height: 400px;
     overflow: hidden;
     position: relative;
-    margin-bottom: 20px; /* Add margin between sections */
+    margin-bottom: 20px;
+    /* Add margin between sections */
 }
 
 .content {
@@ -35,10 +37,14 @@ body, html {
 
 .fixed-part {
     position: absolute;
-    top: 20px; /* Adjust as needed */
-    left: 30px; /* Adjust as needed */
-    background-color: transparent; /* Remove background */
-    z-index: 1; /* Ensure it stays on top */
+    top: 20px;
+    /* Adjust as needed */
+    left: 30px;
+    /* Adjust as needed */
+    background-color: transparent;
+    /* Remove background */
+    z-index: 1;
+    /* Ensure it stays on top */
 }
 
 .fixed-part .title {
@@ -55,26 +61,33 @@ body, html {
 .scroll-content {
     display: flex;
     height: 100%;
-    width: 300vw; /* 3 sections of 100vw each */
-    transition: transform 1.5s ease-in-out; /* Smooth transition */
+    width: 300vw;
+    /* 3 sections of 100vw each */
+    transition: transform 1.5s ease-in-out;
+    /* Smooth transition */
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 0; /* Ensure it stays behind the fixed part */
+    z-index: 0;
+    /* Ensure it stays behind the fixed part */
 }
 
 .scrolling-part {
     display: flex;
-    flex-direction: row; /* Ensure horizontal layout */
+    flex-direction: row;
+    /* Ensure horizontal layout */
     height: 100%;
-    width: 100vw; /* Each part takes full viewport width */
-    /* background-color: #ffffff;*/ /* Background color for each part */
-    background-color: transparent;;
+    width: 100vw;
+    /* Each part takes full viewport width */
+    /* background-color: #ffffff;*/
+    /* Background color for each part */
+    background-color: transparent;
+    ;
     justify-content: center;
     align-items: center;
 }
 
-.scroll-content::before{
+.scroll-content::before {
     content: "";
     position: absolute;
     top: 0;
@@ -82,12 +95,14 @@ body, html {
     width: 100%;
     height: 100%;
 
-    
+
 }
 
-.left-content, .right-content {
+.left-content,
+.right-content {
     width: 50%;
-    height: 100%; /* Ensure they take full height of the scroll-section */
+    height: 100%;
+    /* Ensure they take full height of the scroll-section */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -107,13 +122,17 @@ body, html {
 
 .scrolling-part .media img {
     justify-content: center;
-    width: 90%; /* Image width 50% of its container */
-    height: auto; /* Maintain aspect ratio */
+    width: 90%;
+    /* Image width 50% of its container */
+    height: auto;
+    /* Maintain aspect ratio */
     object-fit: cover;
     display: block;
     margin: auto;
-    position: relative; /* Ensure it's positioned to allow z-index to take effect */
-    z-index: 5; /* Adjust this value to ensure it is above other elements */
+    position: relative;
+    /* Ensure it's positioned to allow z-index to take effect */
+    z-index: 5;
+    /* Adjust this value to ensure it is above other elements */
 }
 
 .media {
@@ -122,30 +141,37 @@ body, html {
 }
 
 .scrolling-part .media .generic-content {
-    width: 100%; /* Width 100% of the container */
-    height: 100%; /* Full height of the container */
+    width: 100%;
+    /* Width 100% of the container */
+    height: 100%;
+    /* Full height of the container */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .scrolling-part .media .babylon-canvas canvas {
-    width: auto; /* Width 100% of the container */
-    height: 380px; /* Full height of the container */
+    width: auto;
+    /* Width 100% of the container */
+    height: 380px;
+    /* Full height of the container */
     aspect-ratio: 1.3;
     display: block;
     margin: auto;
-    background-color: transparent; /* Remove background color if any */
-    outline: none; /* Remove the default focus outline */
-}   
+    background-color: transparent;
+    /* Remove background color if any */
+    outline: none;
+    /* Remove the default focus outline */
+}
 
-.scrolling-part .media .chartjs-canvas canvas{
-    width :100%;
+.scrolling-part .media .chartjs-canvas canvas {
+    width: 100%;
     height: auto;
     display: block;
     margin: auto;
     padding-right: 5%;
-    background-color: transparent; /* Remove background color if any */
+    background-color: transparent;
+    /* Remove background color if any */
 }
 
 /* Media query for mobile screens */
@@ -159,25 +185,35 @@ body, html {
     }
 
     .scroll-section {
-        height: 550px; /* Adjust the height for mobile */
-        margin-bottom: 20px; /* Add margin between sections */
+        height: 550px;
+        /* Adjust the height for mobile */
+        margin-bottom: 20px;
+        /* Add margin between sections */
     }
 
     .scroll-content {
-        width: 300vw; /* Maintain horizontal scroll content */
-        flex-direction: row; /* Maintain horizontal layout */
+        width: 300vw;
+        /* Maintain horizontal scroll content */
+        flex-direction: row;
+        /* Maintain horizontal layout */
     }
+
     .scrolling-part {
-        flex-direction: column; /* Stack left and right content vertically */
-        height: 100%; /* Ensure they take full height of the scroll-section */
+        flex-direction: column;
+        /* Stack left and right content vertically */
+        height: 100%;
+        /* Ensure they take full height of the scroll-section */
     }
-    .left-content, .right-content {
+
+    .left-content,
+    .right-content {
         width: 100%;
-        height: 50%; /* Each takes half the height */
+        height: 50%;
+        /* Each takes half the height */
     }
 
     .fixed-part {
-        left: 10px; 
+        left: 10px;
         top: 5px;
     }
 
@@ -185,7 +221,7 @@ body, html {
         font-size: 1.4em;
         font-weight: bold;
     }
-    
+
     .fixed-part .subtitle {
         font-size: 1.2em;
         /*margin-left: 10px;*/
@@ -203,23 +239,32 @@ body, html {
 
     .scrolling-part .right-content .media img {
         padding-top: 0%;
-        width: 90%; /* Maintain aspect ratio */
-        object-fit: cover; /* Optional: maintain aspect ratio and cover the container */
+        width: 90%;
+        /* Maintain aspect ratio */
+        object-fit: cover;
+        /* Optional: maintain aspect ratio and cover the container */
         display: block;
         margin: auto;
     }
+
     .scrolling-part .media .generic-content {
-        width: 100%; /* Full width on mobile */
-        height: auto; /* Adjust height automatically */
+        width: 100%;
+        /* Full width on mobile */
+        height: auto;
+        /* Adjust height automatically */
     }
+
     .scrolling-part .media .babylon-canvas canvas {
-        width: 100%; /* Width 100% of the container */
-        height: 280px; /* Full height of the container */
+        width: 100%;
+        /* Width 100% of the container */
+        height: 280px;
+        /* Full height of the container */
         aspect-ratio: 1.6;
         display: block;
         margin: auto;
-        background-color: transparent; /* Remove background color if any */
-    }   
+        background-color: transparent;
+        /* Remove background color if any */
+    }
 }
 
 /* Resize text for very small screens */
@@ -228,7 +273,7 @@ body, html {
         font-size: 5vw;
         font-weight: bold;
     }
-    
+
     .fixed-part .subtitle {
         font-size: 4vw;
         margin-left: 10px;
@@ -250,13 +295,20 @@ body, html {
 .pagination-dots {
     display: flex;
     justify-content: center;
-    position: absolute; /* Position it absolutely within the container */
-    bottom: 10px; /* Adjust as necessary to control distance from the bottom */
-    left: 50%; /* Center the dots horizontally */
-    transform: translateX(-50%); /* Adjust for perfect horizontal centering */
-    z-index: 10; /* Ensure the dots are on top of other content */
-    width: 100%; /* Ensure the dots container spans the width of the parent */
-    pointer-events: none; /* Optional: Allows clicks to pass through the dots if needed */
+    position: absolute;
+    /* Position it absolutely within the container */
+    bottom: 10px;
+    /* Adjust as necessary to control distance from the bottom */
+    left: 50%;
+    /* Center the dots horizontally */
+    transform: translateX(-50%);
+    /* Adjust for perfect horizontal centering */
+    z-index: 10;
+    /* Ensure the dots are on top of other content */
+    width: 100%;
+    /* Ensure the dots container spans the width of the parent */
+    pointer-events: none;
+    /* Optional: Allows clicks to pass through the dots if needed */
 }
 
 .dot {
@@ -267,13 +319,16 @@ body, html {
     border-radius: 50%;
     display: inline-block;
     transition: background-color 0.3s;
-    z-index: 11; /* Ensure dots are above other content within the pagination container */
-    pointer-events: auto; /* Allow interaction with the dots */
+    z-index: 11;
+    /* Ensure dots are above other content within the pagination container */
+    pointer-events: auto;
+    /* Allow interaction with the dots */
 }
 
 .dot.active {
     background-color: #717171;
-    z-index: 12; /* Active dot on top of others */
+    z-index: 12;
+    /* Active dot on top of others */
 }
 
 #main-section-svg {
@@ -290,8 +345,10 @@ body, html {
     max-width: 100%;
     max-height: 100%;
     display: block;
-    object-fit: contain; /* Ensure SVG scales to fit the container */
-    z-index: 1;  /* Ensure SVG is above other content */
+    object-fit: contain;
+    /* Ensure SVG scales to fit the container */
+    z-index: 1;
+    /* Ensure SVG is above other content */
 }
 
 #main-section-svg svg .ellipse {
@@ -300,14 +357,14 @@ body, html {
 }
 
 #main-section-svg svg .ellipse:hover {
-    stroke-width: 0.8!important;
+    stroke-width: 0.8 !important;
 }
 
-#main-section-svg svg .formula path{
+#main-section-svg svg .formula path {
     fill: #000000;
 }
 
-#main-section-svg svg .formula:hover path{
+#main-section-svg svg .formula:hover path {
     fill: #5a0000;
 }
 
@@ -323,12 +380,14 @@ body, html {
     background-image: url('https://via.placeholder.com/200x300.png?text=Journal+Cover');
     background-size: cover;
     background-position: center;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); /* Initial shadow */
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    /* Initial shadow */
     border-radius: 10px;
     transform-style: preserve-3d;
     perspective: 1000px;
     cursor: pointer;
-    display: none; /* Hidden by default */
+    display: none;
+    /* Hidden by default */
     z-index: 2;
 }
 
@@ -337,7 +396,8 @@ body, html {
     height: 100%;
     border-radius: 10px;
     object-fit: cover;
-    transform: rotateY(-90deg); /* Start with a rotated view */
+    transform: rotateY(-90deg);
+    /* Start with a rotated view */
     transition: transform 0.8s ease-in-out;
 }
 
