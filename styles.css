@@ -303,8 +303,12 @@ body, html {
     stroke-width: 0.8!important;
 }
 
+#main-section-svg svg .formula path{
+    fill: #000000;
+}
+
 #main-section-svg svg .formula:hover path{
-    fill: #ff0000;
+    fill: #5a0000;
 }
 
 
