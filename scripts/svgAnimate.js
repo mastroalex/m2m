@@ -1,5 +1,4 @@
 // svgAnimate.js
-
 document.addEventListener('DOMContentLoaded', () => {
     function getJsonUrlFromUrl() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -31,6 +30,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         applyAnimations(svgElement);
                     }
+
+                    const journalContainer = document.querySelector('#journal-container');
+                    if (journalContainer) {
+                        journalContainer.style.backgroundImage = `url(${data.mainSection.Journal1.front})`;
+                    }
+                    const journalImage = document.querySelector('#journal-image');
+                    if (journalImage) {
+                        journalImage.src = data.mainSection.Journal1.front;
+                    }
+
                 })
                 .catch(error => console.error('Error loading SVG:', error));
         })
@@ -73,11 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const journalContainer = document.querySelector('#journal-container');
             const journalImage = document.querySelector('#journal-image');
             
-            //journalContainer.style.backgroundImage = `url(${data.mainSection.Journal1.front})`;
-            
-                        // Select the img element
-            // Replace the src attribute with the value from the JSON
-            //journalImage.src = data.mainSection.Journal1.front;
 
             if (journalContainer) {
                 
