@@ -14,7 +14,7 @@ html {
 .main-section {
     padding-top: 10px;
     padding-bottom: 10px;
-    background-color: #ffffff;
+    background-color:transparent;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -181,7 +181,7 @@ html {
 @media (max-width: 768px) {
     .main-section {
         height: 500px;
-        background-color: #f0f0f0;
+        background-color: transparent;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -239,7 +239,7 @@ html {
         font-size: 1em;
         text-align: left;
         margin-top: 50px;
-        margin-bottom: 50px;
+        margin-bottom: 80px;
     }
 
     .scrolling-part .right-content .media img {
@@ -294,7 +294,7 @@ html {
         font-size: 4vw;
         text-align: left;
         margin-top: 50px;
-        margin-bottom: 50px;
+        margin-bottom: 80px;
     }
 
 }
