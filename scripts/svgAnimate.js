@@ -35,16 +35,19 @@ document.addEventListener("DOMContentLoaded", () => {
               front: data.mainSection.Journal1.front,
               back: `url(${data.mainSection.Journal1.back})`,
               link: data.mainSection.Journal1.link,
+              index: 1
             };
             const journal2 = {
               front: data.mainSection.Journal2.front,
               back: `url(${data.mainSection.Journal2.back})`,
               link: data.mainSection.Journal2.link,
+              index: 2
             };
             const journal3 = {
               front: data.mainSection.Journal3.front,
               back: `url(${data.mainSection.Journal3.back})`,
               link: data.mainSection.Journal3.link,
+                index: 3
             };
             applyAnimations(svgElement, journal1, journal2, journal3);
           }
@@ -152,16 +155,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Apply the GSAP animation to each selected element
         elementsToAnimate.forEach((element) => {
-          gsap.fromTo(element, { opacity: 1 }, { opacity: 0.5, duration: 0.8 });
+          gsap.fromTo(element, { opacity: 1 }, { opacity: 0.35, duration: 0.6 });
         });
 
         // Additionally, ensure elements with paper classes maintain full opacity
         paperClasses.forEach((paperClass) => {
           const paperElements = document.querySelectorAll(`.${paperClass}`);
           paperElements.forEach((element) => {
-            gsap.to(element, { opacity: 1, duration: 0 });
+            gsap.to(element, { opacity: 0.7, duration: 0 });
           });
         });
+
+        let X = journal.index;
+        const paperElements = document.querySelectorAll(`.paper${X}`);
+
+        // Now journalElements contains all elements with the class .journal3
+        paperElements.forEach((element) => {
+            gsap.to(element, { opacity: 1, duration: 0 });
+          });
 
         // Animate the container
         gsap.to(updatedContainer, {
