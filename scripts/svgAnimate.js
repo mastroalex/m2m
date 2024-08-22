@@ -180,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
             journalImage.style.display = "none";
             // Animate the container
             gsap.to(updatedContainer, {
-            duration: 1,
+            duration: 0.6,
             opacity: 1,
             rotationY: 0,
             ease: "power2.inOut",
