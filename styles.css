@@ -238,6 +238,8 @@ html {
         box-sizing: border-box;
         font-size: 1em;
         text-align: left;
+        margin-top: 50px;
+        margin-bottom: 50px;
     }
 
     .scrolling-part .right-content .media img {
@@ -291,6 +293,8 @@ html {
         box-sizing: border-box;
         font-size: 4vw;
         text-align: left;
+        margin-top: 50px;
+        margin-bottom: 50px;
     }
 
 }
@@ -343,6 +347,9 @@ html {
 }
 
 @media (max-width: 768px) {
+    .main-section {
+        display: none!important;
+    }
     #main-section-svg {
         display: none;
     }
