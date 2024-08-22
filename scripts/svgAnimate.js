@@ -143,7 +143,7 @@ const allElements = document.querySelectorAll('#main-section-svg *');
 
 // Filter out the elements that have the paper classes
 const elementsToAnimate = Array.from(allElements).filter(element => {
-    return !paperClasses.some(cls => element.classList.contains(cls));
+    return !paperClasses.some(cls => element.classList.contains(cls)) && element.tagName.toLowerCase() !== 'g';
 });
 
 // Apply the GSAP animation to each selected element
@@ -191,22 +191,23 @@ paperClasses.forEach(paperClass => {
 
         function hideJournal() {
             
+            // Construct a CSS selector that excludes the specified classes
+            const exclusionSelector = paperClasses.map(cls => `:not(.${cls})`).join('');
+
+            // Select all elements inside #main-section-svg except those with the paperClasses
+            const elementsToAnimate = document.querySelectorAll(`#main-section-svg *${exclusionSelector}`);
+
+            // Apply the GSAP animation to each selected element
+            elementsToAnimate.forEach(element => {
+                gsap.fromTo(element, 
+                    { opacity: 0.5 }, 
+                    { opacity: 1, duration: 0.1 }
+                );
+            });
 
             hideJournalTimeout = setTimeout(() => {
 
-                // Construct a CSS selector that excludes the specified classes
-                const exclusionSelector = paperClasses.map(cls => `:not(.${cls})`).join('');
-
-                // Select all elements inside #main-section-svg except those with the paperClasses
-                const elementsToAnimate = document.querySelectorAll(`#main-section-svg *${exclusionSelector}`);
-
-                // Apply the GSAP animation to each selected element
-                elementsToAnimate.forEach(element => {
-                    gsap.fromTo(element, 
-                        { opacity: 0.5 }, 
-                        { opacity: 1, duration: 0.1 }
-                    );
-                });
+                
                 const journalContainer = document.querySelector('#journal-container');
                 if (journalContainer) {
                     gsap.to(journalContainer, {
