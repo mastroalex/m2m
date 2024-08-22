@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
             journalContainer.style.backgroundImage = `url(${data.mainSection.Journal1.front})`;
                         // Select the img element
             // Replace the src attribute with the value from the JSON
-            journalImage.src = data.mainSection.Journal1.front;
+            //journalImage.src = data.mainSection.Journal1.front;
 
             if (journalContainer) {
                 
