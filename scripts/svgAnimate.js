@@ -175,37 +175,46 @@ document.addEventListener("DOMContentLoaded", () => {
             gsap.to(element, { opacity: 1, duration: 0 });
           });
 
-        if (journalImage) {
-            // Animate the container
-            updatedContainer.style.zIndex = "3";
-            journalImage.style.zIndex = "4";
-            gsap.set(journalImage, { rotationY: -180, transformOrigin: "left center" });
-
-            gsap.to(updatedContainer, {
-            duration: 1,
-            opacity: 1,
-            rotationY: 0,
-            ease: "power2.inOut",
-            onStart: () => {
-                updatedContainer.style.display = "block";
-            },
+        if (journalImage) {// Reset journalContainer and journalImage properties
+            gsap.set(journalContainer, {
+                rotationY: 0,
+                opacity: 1,
+                zIndex: 1,
+                display: "block",
             });
     
-          // Update the image source
-          journalImage.src = journal.front;
-
-          // Animate the image
-          gsap.to(journalImage, {
-            duration: 1,
-            rotationY: 0,
-            ease: "power2.inOut",
-            transformOrigin: "left center",
-            onComplete: () => {
-            // Ensure the container stays visible behind the flipped image
-            updatedContainer.style.zIndex = "3";
-            journalImage.style.zIndex = "4";
-        }
-          });
+            gsap.set(journalImage, {
+                rotationY: -180, // Start with the image "flipped"
+                opacity: 1,
+                zIndex: 2,
+                transformOrigin: "left center",
+            });
+    
+            // Update the image source
+            journalImage.src = journal.front;
+    
+            // Animate the journalContainer to ensure it's visible
+            gsap.to(journalContainer, {
+                duration: 1,
+                opacity: 1,
+                rotationY: 0,
+                ease: "power2.inOut",
+                onStart: () => {
+                    journalContainer.style.display = "block";
+                },
+            });
+    
+            // Animate the journalImage to flip it into view
+            gsap.to(journalImage, {
+                duration: 1,
+                rotationY: 0, // Flip the image to 0 degrees (front view)
+                ease: "power2.inOut",
+                onComplete: () => {
+                    // Ensure that the journalImage stays on top
+                    journalContainer.style.zIndex = "1";
+                    journalImage.style.zIndex = "2";
+                }
+            });
         }
       }
     }
