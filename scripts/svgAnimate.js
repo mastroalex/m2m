@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 3000);  // Wait 3 seconds before hiding the journal
         }
 
-        const ellipseElements = document.querySelectorAll(".ellipse");
+        const ellipseElements = document.querySelectorAll(".paper3");
 
         if (ellipseElements.length > 0) {
             ellipseElements.forEach(ellipse => {
