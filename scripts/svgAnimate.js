@@ -121,29 +121,36 @@ document.addEventListener('DOMContentLoaded', () => {
             const journalImage = document.querySelector('#journal-image');
             
             if (journalContainer) {
-                journalContainer.style.backgroundImage = journal.back;
-                journalContainer.addEventListener('click', () => {
-                    //window.open(data.mainSection.Journal1.link, '_blank');
+                // Update the background image
+                journalContainer.style.backgroundImage = `url(${journal.back})`;
+        
+                // Remove any existing event listeners on the journalContainer before adding a new one
+                const newContainer = journalContainer.cloneNode(true);
+                journalContainer.parentNode.replaceChild(newContainer, journalContainer);
+        
+                // Attach the click event listener
+                newContainer.addEventListener('click', () => {
                     window.open(journal.link, '_blank');
                 });
             }
+        
             if (journalImage) {
+                // Update the image source
                 journalImage.src = journal.front;
             }
-
+        
             if (journalContainer) {
-                
-                gsap.to(journalContainer, {
+                gsap.to(newContainer, {
                     duration: 1,
                     opacity: 1,
                     rotationY: 0,
                     ease: "power2.inOut",
                     onStart: () => {
-                        journalContainer.style.display = 'block';
+                        newContainer.style.display = 'block';
                     }
                 });
             }
-
+        
             if (journalImage) {
                 gsap.to(journalImage, {
                     duration: 1,
