@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (journalContainer) {
                 // Update the background image
-                journalContainer.style.backgroundImage = `url(${journal.back})`;
+                journalContainer.style.backgroundImage = journal.back;
         
                 // Remove any existing click event listeners by replacing the listener with a new one
                 journalContainer.replaceWith(journalContainer.cloneNode(true));
