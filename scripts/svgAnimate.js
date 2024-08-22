@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       });
     });
-    let hideJournalTimeout;
+    
 
     function showJournal(journal) {
       clearTimeout(hideJournalTimeout); // Clear any pending timeout
@@ -199,8 +199,13 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
+    let opacityTimeout; // Ensure this is declared if not done elsewhere
+    let hideJournalTimeout; // Ensure this is declared if not done elsewhere
+    
     function hideJournal() {
-      // Construct a CSS selector that excludes the specified classes
+        // Clear any previous timeouts to prevent stacking
+        clearTimeout(opacityTimeout);
+        clearTimeout(hideJournalTimeout);
 
       opacityTimeout = setTimeout(() => {
         // Select all elements inside #main-section-svg except those with the paperClasses
@@ -208,7 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Apply the GSAP animation to each selected element
       elementsToAnimate.forEach((element) => {
-        gsap.To(element, { opacity: 1, duration: 0.15 });
+        gsap.to(element, { opacity: 1, duration: 0.15 });
       });
       }, 500);
 
