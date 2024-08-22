@@ -177,7 +177,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
           if (journalImage) {
         
-            journalImage.style.display = "none";
+            gsap.set(journalImage, { opacity: 0, rotationY: -90 });
+
             // Animate the container
             gsap.to(updatedContainer, {
             duration: 0.6,
