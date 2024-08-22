@@ -47,24 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function applyAnimations(svgElement) {
         gsap.fromTo(".formula", 
-            {
-                opacity: 0,
-                scale: 0.5,
-                rotation: 0,
-                x: -100,
-                y: -100
-            }, 
-            {
-                duration: 3,
-                opacity: 1,
-                scale: 1,
-                rotation: 360,
-                x: 0,
-                y: 0,
-                ease: "elastic.out",
-                repeat: -1,
-                yoyo: true
-            }
+            { opacity: 0 }, { opacity: 0.5, duration: 1 }
         );
 
         gsap.from(".ellipse", {
@@ -73,6 +56,30 @@ document.addEventListener('DOMContentLoaded', () => {
             scale: 0.5,
             ease: "bounce.out",
             stagger: 0.2
+        });
+
+        // Select all elements with the class 'ellipse'
+        const ellipseElements = document.querySelectorAll('.ellipse');
+
+        // Loop through each element and apply the hover effect
+        ellipseElements.forEach(ellipse => {
+            // Apply the zoom effect when the mouse enters the element
+            ellipse.addEventListener('mouseenter', () => {
+                gsap.to(ellipse, {
+                    scale: 1.2,  // Increase the scale to 120%
+                    duration: 0.5,  // Animation duration in seconds
+                    ease: "power2.out"  // Easing function
+                });
+            });
+
+            // Revert the zoom effect when the mouse leaves the element
+            ellipse.addEventListener('mouseleave', () => {
+                gsap.to(ellipse, {
+                    scale: 1,  // Reset the scale to the original size
+                    duration: 0.5,  // Animation duration in seconds
+                    ease: "power2.out"  // Easing function
+                });
+            });
         });
 
         let hideJournalTimeout;
@@ -122,12 +129,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 3000);  // Wait 3 seconds before hiding the journal
         }
 
-        const ellipseElements = document.querySelectorAll(".paper3");
+        const journalElements = document.querySelectorAll(".paper3");
 
-        if (ellipseElements.length > 0) {
-            ellipseElements.forEach(ellipse => {
-                ellipse.addEventListener('mouseenter', showJournal);
-                ellipse.addEventListener('mouseleave', hideJournal);
+        if (journalElements.length > 0) {
+            journalElements.forEach(journal => {
+                journal.addEventListener('mouseenter', showJournal);
+                journal.addEventListener('mouseleave', hideJournal);
             });
         }
 
