@@ -196,7 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
           // Animate the image
           gsap.to(journalImage, {
-            duration: 1,
+            duration: 0.6,
             rotationY: 0,
             ease: "power2.inOut",
             onStart: () => {
