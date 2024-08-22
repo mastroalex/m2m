@@ -201,8 +201,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function hideJournal() {
       // Construct a CSS selector that excludes the specified classes
-      
-      // Select all elements inside #main-section-svg except those with the paperClasses
+
+      opacityTimeout = setTimeout(() => {
+        // Select all elements inside #main-section-svg except those with the paperClasses
       const elementsToAnimate = document.querySelectorAll(
         `#main-section-svg *`
       );
@@ -211,6 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
       elementsToAnimate.forEach((element) => {
         gsap.To(element, { opacity: 1, duration: 0.15 });
       });
+      }, 500);
 
       hideJournalTimeout = setTimeout(() => {
         const journalContainer = document.querySelector("#journal-container");
