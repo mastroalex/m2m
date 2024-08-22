@@ -183,6 +183,17 @@ document.addEventListener('DOMContentLoaded', () => {
             gsap.fromTo("#main-section-svg", 
                 { opacity: 0.3 }, { opacity: 1, duration: 0.8 }
             );
+
+            const elementsToAnimate = document.querySelectorAll(`#main-section-svg`);
+
+            // Apply the GSAP animation to each selected element
+            elementsToAnimate.forEach(element => {
+                gsap.fromTo(element, 
+                    { opacity: 0.3 }, 
+                    { opacity: 1, duration: 0.6 }
+                );
+            });
+
             hideJournalTimeout = setTimeout(() => {
                 const journalContainer = document.querySelector('#journal-container');
                 if (journalContainer) {
