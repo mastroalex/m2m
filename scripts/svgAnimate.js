@@ -145,11 +145,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const paperClasses = ['paper1', 'paper2', 'paper3'];
                 // Loop through each paper class and corresponding journal variable
+                // Loop through each paper class and corresponding journal variable
                 paperClasses.forEach((paperClass, index) => {
                     const journalElements = document.querySelectorAll(`.${paperClass}`);
-
+                    
                     if (journalElements.length > 0) {
-                        journalElements.style.opacity = 1;
+                        journalElements.forEach(journalElement => {
+                            journalElement.style.opacity = 1;
+                        });
                     }
                 });
 
