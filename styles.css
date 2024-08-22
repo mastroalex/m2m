@@ -105,6 +105,7 @@ html {
     /* Ensure they take full height of the scroll-section */
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .right-content {
