@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Select all elements with the class 'ellipse'
-        const ellipseElements = document.querySelectorAll('.ellipse');
+        const ellipseElements = document.querySelectorAll('.crop-zoom');
 
         // Loop through each element and apply the hover effect
         ellipseElements.forEach(ellipse => {
@@ -93,8 +93,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const journalContainer = document.querySelector('#journal-container');
             const journalImage = document.querySelector('#journal-image');
             
-            journalContainer.style.backgroundImage = journal.back;
-            journalImage.src = journal.front;
+            if (journalContainer) {
+                journalContainer.style.backgroundImage = journal.back;
+                journalContainer.addEventListener('click', () => {
+                    //window.open(data.mainSection.Journal1.link, '_blank');
+                    window.open(journal.link, '_blank');
+                });
+            }
+            if (journalImage) {
+                journalImage.src = journal.front;
+            }
 
             if (journalContainer) {
                 
@@ -135,24 +143,32 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 3000);  // Wait 3 seconds before hiding the journal
         }
 
-        const journalElements = document.querySelectorAll(".paper1");
 
-        if (journalElements.length > 0) {
-            journalElements.forEach(journal => {
-                journal.addEventListener('mouseenter', () => {
-                    showJournal(journal1);  // Replace 'journal1' with the argument you want to pass
+        // Array of paper classes and corresponding journal variables
+        const paperClasses = ['paper1', 'paper2', 'paper3'];
+        const journalVariables = [journal1, journal2, journal3];
+
+        // Loop through each paper class and corresponding journal variable
+        paperClasses.forEach((paperClass, index) => {
+            const journalElements = document.querySelectorAll(`.${paperClass}`);
+
+            if (journalElements.length > 0) {
+                journalElements.forEach(journal => {
+                    journal.addEventListener('mouseenter', () => {
+                        showJournal(journalVariables[index]);  // Pass the corresponding journal variable
+                    });
+                    journal.addEventListener('mouseleave', hideJournal);
                 });
-                journal.addEventListener('mouseleave', hideJournal);
-            });
-        }
+            }
+        });
 
-        const journalContainer = document.querySelector('#journal-container');
-        if (journalContainer) {
-            journalContainer.addEventListener('click', () => {
-                //window.open(data.mainSection.Journal1.link, '_blank');
-                window.open("https://google.it", '_blank');
-            });
-        }
+        //const journalContainer = document.querySelector('#journal-container');
+        //if (journalContainer) {
+        //    journalContainer.addEventListener('click', () => {
+        //        //window.open(data.mainSection.Journal1.link, '_blank');
+        //        window.open("https://google.it", '_blank');
+        //    });
+        //}
 
 
 
