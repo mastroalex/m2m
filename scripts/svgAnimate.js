@@ -136,24 +136,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 const journalImage = document.querySelector('#journal-image');
 
-                gsap.fromTo("#main-section-svg", 
-                    { opacity: 1 }, { opacity: 0.3, duration: 0.8 }
-                );
-
-                updatedContainer.style.opacity = 1;
-                journalImage.style.opacity = 1;
-
                 const paperClasses = ['paper1', 'paper2', 'paper3'];
-                // Loop through each paper class and corresponding journal variable
-                // Loop through each paper class and corresponding journal variable
-                paperClasses.forEach((paperClass, index) => {
-                    const journalElements = document.querySelectorAll(`.${paperClass}`);
-                    
-                    if (journalElements.length > 0) {
-                        journalElements.forEach(journalElement => {
-                            journalElement.style.opacity = 1;
-                        });
-                    }
+
+                // Construct a CSS selector that excludes the specified classes
+                const exclusionSelector = paperClasses.map(cls => `:not(.${cls})`).join('');
+
+                // Select all elements inside #main-section-svg except those with the paperClasses
+                const elementsToAnimate = document.querySelectorAll(`#main-section-svg *${exclusionSelector}`);
+
+                // Apply the GSAP animation to each selected element
+                elementsToAnimate.forEach(element => {
+                    gsap.fromTo(element, 
+                        { opacity: 1 }, 
+                        { opacity: 0.3, duration: 0.8 }
+                    );
                 });
 
                 // Animate the container
