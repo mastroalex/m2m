@@ -347,6 +347,15 @@ html {
     align-items: center;
 }
 
+@media (max-width: 768px) {
+    .main-section {
+        display: none!important;
+    }
+    #main-section-svg {
+        display: none;
+    }
+    
+}
 
 #main-section-svg svg {
     width: 100%;

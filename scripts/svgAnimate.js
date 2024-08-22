@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(jsonUrl)
         .then(response => response.json())
         .then(data => {
-            const mainSectionSvgContainer = document.getElementById('#main-section-svg');
+            const mainSectionSvgContainer = document.getElementById('main-section-svg');
 
             fetch(data.mainSection.svgImage.link)
                 .then(response => response.text())
@@ -136,8 +136,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 const journalImage = document.querySelector('#journal-image');
 
-                gsap.fromTo("main-section-svg", 
-                    { opacity: 0 }, { opacity: 1, duration: 0.8 }
+                gsap.fromTo("#main-section-svg", 
+                    { opacity: 0.3 }, { opacity: 1, duration: 0.8 }
                 );
 
                 updatedContainer.style.opacity = 1;
