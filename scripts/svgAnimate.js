@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { opacity: 0 }, { opacity: 0.5, duration: 1 }
         );
 
-        gsap.from(".ellipse", {
+        gsap.from(".crop-zoom", {
             duration: 1.5,
             opacity: 0,
             scale: 0.5,
