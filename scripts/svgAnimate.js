@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function showJournal(journal) {
             clearTimeout(hideJournalTimeout);  // Clear any pending timeout
             const journalContainer = document.querySelector('#journal-container');
-            const journalImage = document.querySelector('#journal-image');
+            
 
 
             if (journalContainer) {
@@ -133,7 +133,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 updatedContainer.addEventListener('click', () => {
                     window.open(journal.link, '_blank');
                 });
-        
+                
+                const journalImage = document.querySelector('#journal-image');
+                
                 // Animate the container
                 gsap.to(updatedContainer, {
                     duration: 1,
