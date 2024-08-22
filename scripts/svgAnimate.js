@@ -62,30 +62,57 @@ document.addEventListener('DOMContentLoaded', () => {
             stagger: 0.2
         });
 
-        // Select all elements with the class 'ellipse'
-        const ellipseElements = document.querySelectorAll('.crop-zoom');
+        // Seleziona tutti gli elementi con la classe 'ellipse'
+    const ellipseElements = document.querySelectorAll('.ellipse');
 
-        // Loop through each element and apply the hover effect
-        ellipseElements.forEach(ellipse => {
-            // Apply the zoom effect when the mouse enters the element
-            ellipse.addEventListener('mouseenter', () => {
-                gsap.to(ellipse, {
-                    scale: 1.2,  // Increase the scale to 120%
-                    duration: 0.5,  // Animation duration in seconds
-                    ease: "power2.out"  // Easing function
-                });
-            });
+    // Funzione per ottenere la posizione del mouse relativa all'elemento
+    function getMousePos(event, element) {
+        const rect = element.getBoundingClientRect();
+        return {
+            x: event.clientX - rect.left,
+            y: event.clientY - rect.top
+        };
+    }
 
-            // Revert the zoom effect when the mouse leaves the element
-            ellipse.addEventListener('mouseleave', () => {
-                gsap.to(ellipse, {
-                    scale: 1,  // Reset the scale to the original size
-                    duration: 0.5,  // Animation duration in seconds
-                    ease: "power2.out"  // Easing function
-                });
+    // Loop attraverso ogni elemento e applica l'effetto di zoom
+    ellipseElements.forEach(ellipse => {
+        // Applica l'effetto di zoom quando il mouse entra nell'elemento
+        ellipse.addEventListener('mouseenter', event => {
+            // Ottieni la posizione del mouse relativa all'elemento
+            const mousePos = getMousePos(event, ellipse);
+
+            // Calcola la trasformazione necessaria per mantenere l'ingrandimento centrato
+            gsap.to(ellipse, {
+                scale: 1.2,  // Aumenta la scala al 120%
+                duration: 0.5,  // Durata dell'animazione in secondi
+                ease: "power2.out",  // Funzione di easing
+                x: (0.2 * mousePos.x - 0.1 * ellipse.offsetWidth),
+                y: (0.2 * mousePos.y - 0.1 * ellipse.offsetHeight)
             });
         });
 
+        // Ripristina l'effetto di zoom quando il mouse lascia l'elemento
+        ellipse.addEventListener('mouseleave', () => {
+            gsap.to(ellipse, {
+                scale: 1,  // Ripristina la scala alla dimensione originale
+                x: 0,  // Resetta la posizione orizzontale
+                y: 0,  // Resetta la posizione verticale
+                duration: 0.5,  // Durata dell'animazione in secondi
+                ease: "power2.out"  // Funzione di easing
+            });
+        });
+
+        // Opzionalmente, aggiungi un effetto di movimento del mouse
+        ellipse.addEventListener('mousemove', event => {
+            const mousePos = getMousePos(event, ellipse);
+
+            gsap.to(ellipse, {
+                x: (0.2 * mousePos.x - 0.1 * ellipse.offsetWidth),
+                y: (0.2 * mousePos.y - 0.1 * ellipse.offsetHeight),
+                duration: 0.1  // Breve durata per seguire il mouse
+            });
+        });
+    });
         let hideJournalTimeout;
 
         function showJournal(journal) {
