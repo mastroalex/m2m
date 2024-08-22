@@ -121,7 +121,8 @@ document.addEventListener("DOMContentLoaded", () => {
     
 
     function showJournal(journal) {
-      clearTimeout(hideJournalTimeout); // Clear any pending timeout
+        clearTimeout(opacityTimeout);
+        clearTimeout(hideJournalTimeout);
       const journalContainer = document.querySelector("#journal-container");
 
       if (journalContainer) {
