@@ -201,18 +201,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function hideJournal() {
       // Construct a CSS selector that excludes the specified classes
-      const exclusionSelector = paperClasses
-        .map((cls) => `:not(.${cls})`)
-        .join("");
-
+      
       // Select all elements inside #main-section-svg except those with the paperClasses
       const elementsToAnimate = document.querySelectorAll(
-        `#main-section-svg *${exclusionSelector}`
+        `#main-section-svg *`
       );
 
       // Apply the GSAP animation to each selected element
       elementsToAnimate.forEach((element) => {
-        gsap.fromTo(element, { opacity: 0.5 }, { opacity: 1, duration: 0.1 });
+        gsap.To(element, { opacity: 1, duration: 0.15 });
       });
 
       hideJournalTimeout = setTimeout(() => {
