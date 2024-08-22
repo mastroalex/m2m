@@ -28,16 +28,20 @@ document.addEventListener('DOMContentLoaded', () => {
                         svgElement.style.objectFit = 'contain';
                         svgElement.setAttribute('preserveAspectRatio', 'xMidYMid meet');
 
-                        applyAnimations(svgElement);
-                    }
+                        //applyAnimations(svgElement);
+                    
 
-                    const journalContainer = document.querySelector('#journal-container');
-                    if (journalContainer) {
-                        journalContainer.style.backgroundImage = `url(${data.mainSection.Journal1.back})`;
-                    }
-                    const journalImage = document.querySelector('#journal-image');
-                    if (journalImage) {
-                        journalImage.src = data.mainSection.Journal1.front;
+                        const journal1  = { front: data.mainSection.Journal1.front,
+                            back : `url(${data.mainSection.Journal1.back})`,
+                            link : data.mainSection.Journal1.link};
+                        const journal2  = { front: data.mainSection.Journal2.front,
+                            back : `url(${data.mainSection.Journal2.back})`,
+                            link : data.mainSection.Journal2.link};
+                        const journal3  = { front: data.mainSection.Journal3.front,
+                            back : `url(${data.mainSection.Journal3.back})`,
+                            link : data.mainSection.Journal3.link};
+                        applyAnimations(svgElement, journal1, journal2, journal3);
+
                     }
 
                 })
@@ -45,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error('Error fetching JSON:', error));
 
-    function applyAnimations(svgElement) {
+    function applyAnimations(svgElement, journal1, journal2, journal3) {
         gsap.fromTo(".formula", 
             { opacity: 0 }, { opacity: 0.5, duration: 1 }
         );
@@ -84,11 +88,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let hideJournalTimeout;
 
-        function showJournal() {
+        function showJournal(journal) {
             clearTimeout(hideJournalTimeout);  // Clear any pending timeout
             const journalContainer = document.querySelector('#journal-container');
             const journalImage = document.querySelector('#journal-image');
             
+            journalContainer.style.backgroundImage = journal.back;
+            journalImage.src = journal.front;
 
             if (journalContainer) {
                 
@@ -129,11 +135,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 3000);  // Wait 3 seconds before hiding the journal
         }
 
-        const journalElements = document.querySelectorAll(".paper3");
+        const journalElements = document.querySelectorAll(".paper1");
 
         if (journalElements.length > 0) {
             journalElements.forEach(journal => {
-                journal.addEventListener('mouseenter', showJournal);
+                journal.addEventListener('mouseenter', () => {
+                    showJournal(journal1);  // Replace 'journal1' with the argument you want to pass
+                });
                 journal.addEventListener('mouseleave', hideJournal);
             });
         }
@@ -145,5 +153,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.open("https://google.it", '_blank');
             });
         }
+
+
+
+
     }
 });
