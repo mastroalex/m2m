@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     const journalContainer = document.querySelector('#journal-container');
                     if (journalContainer) {
-                        journalContainer.style.backgroundImage = `url(${data.mainSection.Journal1.front})`;
+                        journalContainer.style.backgroundImage = `url(${data.mainSection.Journal1.back})`;
                     }
                     const journalImage = document.querySelector('#journal-image');
                     if (journalImage) {
