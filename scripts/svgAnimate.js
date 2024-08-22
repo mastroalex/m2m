@@ -73,9 +73,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const journalContainer = document.querySelector('#journal-container');
             const journalImage = document.querySelector('#journal-image');
             
+            journalContainer.style.backgroundImage = `url(${data.mainSection.Journal1.front})`;
+                        // Select the img element
+            // Replace the src attribute with the value from the JSON
+            journalImage.src = data.mainSection.Journal1.front;
+
             if (journalContainer) {
                 
-
                 gsap.to(journalContainer, {
                     duration: 1,
                     opacity: 1,
@@ -125,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const journalContainer = document.querySelector('#journal-container');
         if (journalContainer) {
             journalContainer.addEventListener('click', () => {
-                window.open('https://example.com', '_blank');
+                window.open(data.mainSection.Journal1.link, '_blank');
             });
         }
     }
