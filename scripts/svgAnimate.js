@@ -204,9 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       opacityTimeout = setTimeout(() => {
         // Select all elements inside #main-section-svg except those with the paperClasses
-      const elementsToAnimate = document.querySelectorAll(
-        `#main-section-svg *`
-      );
+      const elementsToAnimate = document.querySelectorAll("#main-section-svg *");
 
       // Apply the GSAP animation to each selected element
       elementsToAnimate.forEach((element) => {
