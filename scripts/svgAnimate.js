@@ -118,51 +118,49 @@ document.addEventListener("DOMContentLoaded", () => {
     let hideJournalTimeout;
 
     function showJournal(journal) {
-      clearTimeout(hideJournalTimeout); // Clear any pending timeout
-      const journalContainer = document.querySelector("#journal-container");
-      const journalImage = document.querySelector("#journal-image");
-
-      if (journalContainer) {
-        // Update the background image
-        journalContainer.style.backgroundImage = `url(${journal.back})`;
-
-        // Remove any existing event listeners on the journalContainer before adding a new one
-        const newContainer = journalContainer.cloneNode(true);
-        journalContainer.parentNode.replaceChild(
-          newContainer,
-          journalContainer
-        );
-
-        // Attach the click event listener
-        newContainer.addEventListener("click", () => {
-          window.open(journal.link, "_blank");
-        });
-      }
-
-      if (journalImage) {
-        // Update the image source
-        journalImage.src = journal.front;
-      }
-
-      if (journalContainer) {
-        gsap.to(newContainer, {
-          duration: 1,
-          opacity: 1,
-          rotationY: 0,
-          ease: "power2.inOut",
-          onStart: () => {
-            newContainer.style.display = "block";
-          },
-        });
-      }
-
-      if (journalImage) {
-        gsap.to(journalImage, {
-          duration: 1,
-          rotationY: 0,
-          ease: "power2.inOut",
-        });
-      }
+        clearTimeout(hideJournalTimeout);  // Clear any pending timeout
+        const journalContainer = document.querySelector('#journal-container');
+        const journalImage = document.querySelector('#journal-image');
+        let newContainer;
+    
+        if (journalContainer) {
+            // Update the background image
+            journalContainer.style.backgroundImage = `url(${journal.back})`;
+    
+            // Clone the container to remove existing event listeners
+            newContainer = journalContainer.cloneNode(true);
+            journalContainer.parentNode.replaceChild(newContainer, journalContainer);
+    
+            // Attach the click event listener
+            newContainer.addEventListener('click', () => {
+                window.open(journal.link, '_blank');
+            });
+        }
+    
+        if (journalImage) {
+            // Update the image source
+            journalImage.src = journal.front;
+        }
+    
+        if (newContainer) {
+            gsap.to(newContainer, {
+                duration: 1,
+                opacity: 1,
+                rotationY: 0,
+                ease: "power2.inOut",
+                onStart: () => {
+                    newContainer.style.display = 'block';
+                }
+            });
+        }
+    
+        if (journalImage) {
+            gsap.to(journalImage, {
+                duration: 1,
+                rotationY: 0,
+                ease: "power2.inOut"
+            });
+        }
     }
 
     function hideJournal() {
