@@ -175,18 +175,18 @@ document.addEventListener("DOMContentLoaded", () => {
             gsap.to(element, { opacity: 1, duration: 0 });
           });
 
-        // Animate the container
-        gsap.to(updatedContainer, {
-          duration: 1,
-          opacity: 1,
-          rotationY: 0,
-          ease: "power2.inOut",
-          onStart: () => {
-            updatedContainer.style.display = "block";
-          },
-        });
-
         if (journalImage) {
+            // Animate the container
+            gsap.to(updatedContainer, {
+            duration: 1,
+            opacity: 1,
+            rotationY: 0,
+            ease: "power2.inOut",
+            onStart: () => {
+                updatedContainer.style.display = "block";
+            },
+            });
+    
           // Update the image source
           journalImage.src = journal.front;
 
