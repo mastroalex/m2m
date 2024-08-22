@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Seleziona tutti gli elementi con la classe 'ellipse'
-    const ellipseElements = document.querySelectorAll('.ellipse');
+    const ellipseElements = document.querySelectorAll('.crop-zoom');
 
     // Funzione per ottenere la posizione del mouse relativa all'elemento
     function getMousePos(event, element) {
