@@ -152,6 +152,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     );
                 });
 
+                // Additionally, ensure elements with paper classes maintain full opacity
+                paperClasses.forEach(paperClass => {
+                    const paperElements = document.querySelectorAll(`#main-section-svg .${paperClass}`);
+                    paperElements.forEach(element => {
+                        gsap.to(element, { opacity: 1, duration: 0 });
+                    });
+                });
+
                 // Animate the container
                 gsap.to(updatedContainer, {
                     duration: 1,
