@@ -200,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
             rotationY: 0,
             opacity: 1,
             ease: "power2.inOut",
-            delay: 0.3,
+            delay: 0.2,
             onStart: () => {
               journalImage.style.display = "block";
             },
