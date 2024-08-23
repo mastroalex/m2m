@@ -181,22 +181,20 @@ document.addEventListener("DOMContentLoaded", () => {
         
 
         if (journalImage) {
-
           journalImage.src = journal.front;
-
-          // Imposta lo stato iniziale per journalImage per creare l'effetto di "sfogliamento"
+          // Imposta lo stato iniziale di journalImage per l'effetto "pagina girata"
           gsap.set(journalImage, {
-              rotationY: +90, 
-              scaleY: 0.9, // Comprimi leggermente l'asse Y per dare profondità
-              transformOrigin: "right center", // Origine della trasformazione per la rotazione
-              boxShadow: "0px 0px 20px rgba(0, 0, 0, 0.3)", // Ombra iniziale per l'effetto 3D
-              skewY: 10, // Aggiungi curvatura durante lo sfogliamento
-              filter: "blur(1px)" // Effetto blur per il movimento rapido
+              rotationY: -180, // Inizia completamente girata
+              scaleY: 0.95, // Leggera compressione verticale per l'effetto prospettico
+              skewY: 15, // Inizia con una forte curvatura
+              transformOrigin: "left center", // Punto di rotazione
+              boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.4)", // Ombra intensa all'inizio
+              filter: "blur(3px)" // Blur iniziale per dare l'idea di movimento
           });
       
-          // Anima il container (simula la pagina precedente che viene sfogliata via)
+          // Anima il container (pagina precedente)
           gsap.to(updatedContainer, {
-              duration: 0.3,
+              duration: 0.8,
               opacity: 1,
               rotationY: 0,
               ease: "power2.inOut",
@@ -204,15 +202,15 @@ document.addEventListener("DOMContentLoaded", () => {
                   updatedContainer.style.display = "block";
               },
               onComplete: () => {
-                  // Ritardo leggermente aumentato prima di iniziare il flip di journalImage
+                  // Anima il journalImage con un movimento più complesso per un effetto realistico
                   gsap.to(journalImage, {
-                      duration: 0.6,
-                      rotationY: 0, // Ruota a 0 gradi per visualizzare l'immagine
-                      scaleY: 1, // Ritorna alla scala normale
-                      skewY: 0, // Rimuovi la curvatura quando la pagina è piatta
-                      filter: "blur(0px)", // Rimuovi il blur per chiarezza
-                      ease: "power2.inOut",
-                      boxShadow: "0px 0px 0px rgba(0, 0, 0, 0)", // Rimuovi l'ombra dopo il flip
+                      duration: 1,
+                      rotationY: 0, // Ruota alla posizione normale
+                      scaleY: 1, // Ripristina la scala normale
+                      skewY: 0, // Rimuove la curvatura mentre la pagina si appiattisce
+                      filter: "blur(0px)", // Rimuove il blur
+                      boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.2)", // Diminuisce l'ombra per un effetto di assestamento
+                      ease: "elastic.out(1, 0.5)", // Un'animazione elastica per simulare la flessibilità della carta
                       onStart: () => {
                           journalImage.style.display = "block";
                       }
