@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Now journalElements contains all elements with the class .journal3
         paperElements.forEach((element) => {
-          gsap.to(element, { opacity: 1, duration: 0 });
+          gsap.to(element, { opacity: 0.5, duration: 0 });
         });
 
         if (journalImage) {
@@ -183,7 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
           // Animate the container
           gsap.to(updatedContainer, {
-            duration: 0.6,
+            duration: 0.4,
             opacity: 1,
             rotationY: 0,
             ease: "power2.inOut",
@@ -199,6 +199,7 @@ document.addEventListener("DOMContentLoaded", () => {
           gsap.to(journalImage, {
             duration: 0.6,
             rotationY: 0,
+            opacity: 1,
             ease: "power2.inOut",
             delay: 0.3,
             onStart: () => {
