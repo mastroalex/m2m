@@ -179,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         
-        journalImage.src = journal.front;
+        
 
         if (journalImage) {
           journalImage.src = journal.front;

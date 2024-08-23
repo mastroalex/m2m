@@ -422,8 +422,9 @@ html {
     height: 100%;
     border-radius: 10px;
     object-fit: cover;
+   /* 
     transform: rotateY(-90deg);
-    /* Start with a rotated view */
+    Start with a rotated view */
     transition: transform 0.8s ease-in-out;
 }
 
