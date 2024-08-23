@@ -178,20 +178,25 @@ document.addEventListener("DOMContentLoaded", () => {
           gsap.to(element, { opacity: 1, duration: 0 });
         });
 
+        
+
         if (journalImage) {
-          // Update the image 
+
           journalImage.src = journal.front;
-          // Set the initial state for journalImage to create the "flip" effect
+
+          // Imposta lo stato iniziale per journalImage per creare l'effetto di "sfogliamento"
           gsap.set(journalImage, {
               rotationY: -90, 
-              scaleY: 0.9, // Slightly compress the image on the Y-axis
-              transformOrigin: "left center", // Set the transform origin to the left for a more realistic flip
-              boxShadow: "0px 0px 20px rgba(0, 0, 0, 0.3)" // Initial shadow for the 3D effect
+              scaleY: 0.9, // Comprimi leggermente l'asse Y per dare profondità
+              transformOrigin: "left center", // Origine della trasformazione per la rotazione
+              boxShadow: "0px 0px 20px rgba(0, 0, 0, 0.3)", // Ombra iniziale per l'effetto 3D
+              skewY: 10, // Aggiungi curvatura durante lo sfogliamento
+              filter: "blur(2px)" // Effetto blur per il movimento rapido
           });
       
-          // Animate the container (previous page flip)
+          // Anima il container (simula la pagina precedente che viene sfogliata via)
           gsap.to(updatedContainer, {
-              duration: 0.3,
+              duration: 0.6,
               opacity: 1,
               rotationY: 0,
               ease: "power2.inOut",
@@ -199,13 +204,15 @@ document.addEventListener("DOMContentLoaded", () => {
                   updatedContainer.style.display = "block";
               },
               onComplete: () => {
-                  // Add a slight delay before starting the journalImage flip
+                  // Ritardo leggermente aumentato prima di iniziare il flip di journalImage
                   gsap.to(journalImage, {
-                      duration: 0.5,
-                      rotationY: 0, // Flip to 0 degrees
-                      scaleY: 1, // Return to normal scale
+                      duration: 0.6,
+                      rotationY: 0, // Ruota a 0 gradi per visualizzare l'immagine
+                      scaleY: 1, // Ritorna alla scala normale
+                      skewY: 0, // Rimuovi la curvatura quando la pagina è piatta
+                      filter: "blur(0px)", // Rimuovi il blur per chiarezza
                       ease: "power2.inOut",
-                      boxShadow: "0px 0px 0px rgba(0, 0, 0, 0)", // Remove shadow after the flip
+                      boxShadow: "0px 0px 0px rgba(0, 0, 0, 0)", // Rimuovi l'ombra dopo il flip
                       onStart: () => {
                           journalImage.style.display = "block";
                       }
