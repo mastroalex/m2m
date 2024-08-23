@@ -179,45 +179,44 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         
+        journalImage.src = journal.front;
 
         if (journalImage) {
           journalImage.src = journal.front;
-          // Imposta lo stato iniziale di journalImage per l'effetto "pagina girata"
-          gsap.set(journalImage, {
-              rotationY: -180, // Inizia completamente girata
-              scaleY: 0.95, // Leggera compressione verticale per l'effetto prospettico
-              skewY: 15, // Inizia con una forte curvatura
-              transformOrigin: "left center", // Punto di rotazione
-              boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.4)", // Ombra intensa all'inizio
-              filter: "blur(3px)" // Blur iniziale per dare l'idea di movimento
-          });
-      
-          // Anima il container (pagina precedente)
-          gsap.to(updatedContainer, {
-              duration: 0.8,
-              opacity: 1,
-              rotationY: 0,
-              ease: "power2.inOut",
-              onStart: () => {
-                  updatedContainer.style.display = "block";
-              },
-              onComplete: () => {
-                  // Anima il journalImage con un movimento più complesso per un effetto realistico
-                  gsap.to(journalImage, {
-                      duration: 1,
-                      rotationY: 0, // Ruota alla posizione normale
-                      scaleY: 1, // Ripristina la scala normale
-                      skewY: 0, // Rimuove la curvatura mentre la pagina si appiattisce
-                      filter: "blur(0px)", // Rimuove il blur
-                      boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.2)", // Diminuisce l'ombra per un effetto di assestamento
-                      ease: "elastic.out(1, 0.5)", // Un'animazione elastica per simulare la flessibilità della carta
-                      onStart: () => {
-                          journalImage.style.display = "block";
-                      }
-                  });
-              }
-          });
-      }
+    // Ensure the journalContainer is fully visible first
+    gsap.set(journalContainer, {
+        opacity: 0, // Start invisible
+        display: "block", // Ensure it's visible in the layout
+        zIndex: 2 // Set zIndex to make sure it's behind the image
+    });
+
+    gsap.set(journalImage, {
+        opacity: 0, // Start invisible
+        display: "block", // Ensure it's in the layout
+        zIndex: 3 // Set zIndex to make sure it's on top of the container
+    });
+
+    // Animate the container to fade in
+    gsap.to(journalContainer, {
+        duration: 1,
+        opacity: 1, // Fade in
+        ease: "power2.inOut",
+        onStart: () => {
+            journalContainer.style.display = "block"; // Ensure it is displayed
+        }
+    });
+
+    // After the container is fully visible, animate the journalImage to appear
+    gsap.to(journalImage, {
+        duration: 1,
+        opacity: 1, // Fade in the image on top
+        ease: "power2.inOut",
+        delay: 0.3, // Optional delay to allow the container to show first
+        onStart: () => {
+            journalImage.style.display = "block"; // Ensure it is displayed
+        }
+    });
+}
       }
     }
 
