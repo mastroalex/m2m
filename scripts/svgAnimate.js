@@ -186,17 +186,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
           // Imposta lo stato iniziale per journalImage per creare l'effetto di "sfogliamento"
           gsap.set(journalImage, {
-              rotationY: -90, 
+              rotationY: +90, 
               scaleY: 0.9, // Comprimi leggermente l'asse Y per dare profondità
-              transformOrigin: "left center", // Origine della trasformazione per la rotazione
+              transformOrigin: "right center", // Origine della trasformazione per la rotazione
               boxShadow: "0px 0px 20px rgba(0, 0, 0, 0.3)", // Ombra iniziale per l'effetto 3D
               skewY: 10, // Aggiungi curvatura durante lo sfogliamento
-              filter: "blur(2px)" // Effetto blur per il movimento rapido
+              filter: "blur(1px)" // Effetto blur per il movimento rapido
           });
       
           // Anima il container (simula la pagina precedente che viene sfogliata via)
           gsap.to(updatedContainer, {
-              duration: 0.6,
+              duration: 0.3,
               opacity: 1,
               rotationY: 0,
               ease: "power2.inOut",
