@@ -179,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         if (journalImage) {
-          gsap.set(journalImage, { rotationY: -90 });
+          gsap.set(journalImage, { rotationY: 0 });
 
           // Animate the container
           gsap.to(updatedContainer, {
