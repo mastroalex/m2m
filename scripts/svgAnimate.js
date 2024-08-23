@@ -35,19 +35,19 @@ document.addEventListener("DOMContentLoaded", () => {
               front: data.mainSection.Journal1.front,
               back: `url(${data.mainSection.Journal1.back})`,
               link: data.mainSection.Journal1.link,
-              index: 1
+              index: 1,
             };
             const journal2 = {
               front: data.mainSection.Journal2.front,
               back: `url(${data.mainSection.Journal2.back})`,
               link: data.mainSection.Journal2.link,
-              index: 2
+              index: 2,
             };
             const journal3 = {
               front: data.mainSection.Journal3.front,
               back: `url(${data.mainSection.Journal3.back})`,
               link: data.mainSection.Journal3.link,
-                index: 3
+              index: 3,
             };
             applyAnimations(svgElement, journal1, journal2, journal3);
           }
@@ -118,11 +118,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       });
     });
-    
 
     function showJournal(journal) {
-        clearTimeout(opacityTimeout);
-        clearTimeout(hideJournalTimeout);
+      clearTimeout(opacityTimeout);
+      clearTimeout(hideJournalTimeout);
       const journalContainer = document.querySelector("#journal-container");
 
       if (journalContainer) {
@@ -156,7 +155,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Apply the GSAP animation to each selected element
         elementsToAnimate.forEach((element) => {
-          gsap.fromTo(element, { opacity: 1 }, { opacity: 0.35, duration: 0.6 });
+          gsap.fromTo(
+            element,
+            { opacity: 1 },
+            { opacity: 0.35, duration: 0.6 }
+          );
         });
 
         // Additionally, ensure elements with paper classes maintain full opacity
@@ -172,57 +175,64 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Now journalElements contains all elements with the class .journal3
         paperElements.forEach((element) => {
-            gsap.to(element, { opacity: 1, duration: 0 });
+          gsap.to(element, { opacity: 1, duration: 0 });
+        });
+
+        if (journalImage) {
+
+          // Set the initial state for journalImage to create the "flip" effect
+          gsap.set(journalImage, {
+              rotationY: -90, 
+              scaleY: 0.9, // Slightly compress the image on the Y-axis
+              transformOrigin: "left center", // Set the transform origin to the left for a more realistic flip
+              boxShadow: "0px 0px 20px rgba(0, 0, 0, 0.3)" // Initial shadow for the 3D effect
           });
-
-          if (journalImage) {
-        
-            gsap.set(journalImage, {rotationY: -90 });
-
-            // Animate the container
-            gsap.to(updatedContainer, {
-            duration: 0.6,
-            opacity: 1,
-            rotationY: 0,
-            ease: "power2.inOut",
-            onStart: () => {
-                updatedContainer.style.display = "block";
-            },
-            });
-
-        
-          // Update the image source
-          journalImage.src = journal.front;
-
-          // Animate the image
-          gsap.to(journalImage, {
-            duration: 0.6,
-            rotationY: 0,
-            ease: "power2.inOut",
-            onStart: () => {
-                journalImage.style.display = "block";
-            },
+      
+          // Animate the container (previous page flip)
+          gsap.to(updatedContainer, {
+              duration: 0.6,
+              opacity: 1,
+              rotationY: 0,
+              ease: "power2.inOut",
+              onStart: () => {
+                  updatedContainer.style.display = "block";
+              },
+              onComplete: () => {
+                  // Add a slight delay before starting the journalImage flip
+                  gsap.to(journalImage, {
+                      duration: 0.6,
+                      rotationY: 0, // Flip to 0 degrees
+                      scaleY: 1, // Return to normal scale
+                      ease: "power2.inOut",
+                      boxShadow: "0px 0px 0px rgba(0, 0, 0, 0)", // Remove shadow after the flip
+                      onStart: () => {
+                          journalImage.style.display = "block";
+                      }
+                  });
+              }
           });
-        }
+      }
       }
     }
 
     let opacityTimeout; // Ensure this is declared if not done elsewhere
     let hideJournalTimeout; // Ensure this is declared if not done elsewhere
-    
+
     function hideJournal() {
-        // Clear any previous timeouts to prevent stacking
-        clearTimeout(opacityTimeout);
-        clearTimeout(hideJournalTimeout);
+      // Clear any previous timeouts to prevent stacking
+      clearTimeout(opacityTimeout);
+      clearTimeout(hideJournalTimeout);
 
       opacityTimeout = setTimeout(() => {
         // Select all elements inside #main-section-svg except those with the paperClasses
-      const elementsToAnimate = document.querySelectorAll("#main-section-svg *");
+        const elementsToAnimate = document.querySelectorAll(
+          "#main-section-svg *"
+        );
 
-      // Apply the GSAP animation to each selected element
-      elementsToAnimate.forEach((element) => {
-        gsap.to(element, { opacity: 1, duration: 0.15 });
-      });
+        // Apply the GSAP animation to each selected element
+        elementsToAnimate.forEach((element) => {
+          gsap.to(element, { opacity: 1, duration: 0.15 });
+        });
       }, 500);
 
       hideJournalTimeout = setTimeout(() => {
