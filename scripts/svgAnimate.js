@@ -178,45 +178,34 @@ document.addEventListener("DOMContentLoaded", () => {
           gsap.to(element, { opacity: 1, duration: 0 });
         });
 
-        
-        
-
         if (journalImage) {
+          gsap.set(journalImage, { rotationY: -90 });
+
+          // Animate the container
+          gsap.to(updatedContainer, {
+            duration: 0.6,
+            opacity: 1,
+            rotationY: 0,
+            ease: "power2.inOut",
+            onStart: () => {
+              updatedContainer.style.display = "block";
+            },
+          });
+
+          // Update the image source
           journalImage.src = journal.front;
-    // Ensure the journalContainer is fully visible first
-    gsap.set(journalContainer, {
-        opacity: 0, // Start invisible
-        display: "block", // Ensure it's visible in the layout
-        zIndex: 2 // Set zIndex to make sure it's behind the image
-    });
 
-    gsap.set(journalImage, {
-        opacity: 0, // Start invisible
-        display: "block", // Ensure it's in the layout
-        zIndex: 3 // Set zIndex to make sure it's on top of the container
-    });
-
-    // Animate the container to fade in
-    gsap.to(journalContainer, {
-        duration: 1,
-        opacity: 1, // Fade in
-        ease: "power2.inOut",
-        onStart: () => {
-            journalContainer.style.display = "block"; // Ensure it is displayed
+          // Animate the image
+          gsap.to(journalImage, {
+            duration: 0.6,
+            rotationY: 0,
+            ease: "power2.inOut",
+            delay: 0.3,
+            onStart: () => {
+              journalImage.style.display = "block";
+            },
+          });
         }
-    });
-
-    // After the container is fully visible, animate the journalImage to appear
-    gsap.to(journalImage, {
-        duration: 1,
-        opacity: 1, // Fade in the image on top
-        ease: "power2.inOut",
-        delay: 0.3, // Optional delay to allow the container to show first
-        onStart: () => {
-            journalImage.style.display = "block"; // Ensure it is displayed
-        }
-    });
-}
       }
     }
 
