@@ -179,7 +179,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         if (journalImage) {
-
+          // Update the image 
+          journalImage.src = journal.front;
           // Set the initial state for journalImage to create the "flip" effect
           gsap.set(journalImage, {
               rotationY: -90, 
@@ -190,7 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
       
           // Animate the container (previous page flip)
           gsap.to(updatedContainer, {
-              duration: 0.6,
+              duration: 0.3,
               opacity: 1,
               rotationY: 0,
               ease: "power2.inOut",
@@ -200,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
               onComplete: () => {
                   // Add a slight delay before starting the journalImage flip
                   gsap.to(journalImage, {
-                      duration: 0.6,
+                      duration: 0.5,
                       rotationY: 0, // Flip to 0 degrees
                       scaleY: 1, // Return to normal scale
                       ease: "power2.inOut",
