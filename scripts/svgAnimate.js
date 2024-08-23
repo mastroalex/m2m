@@ -181,7 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (journalImage) {
           // Update the image source
           journalImage.src = journal.front;
-          gsap.set(journalImage, { rotationY: 0, opacity: 0.5 });
+          gsap.set(journalImage, { rotationY: 0, opacity: 0.15 });
 
           // Animate the container
           gsap.to(updatedContainer, {
