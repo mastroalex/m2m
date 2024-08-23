@@ -179,6 +179,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         if (journalImage) {
+
+          // Update the image source
+          journalImage.src = journal.front; 
           gsap.set(journalImage, { rotationY: 0, opacity: 0.5 });
 
           // Animate the container
@@ -190,21 +193,22 @@ document.addEventListener("DOMContentLoaded", () => {
             onStart: () => {
               updatedContainer.style.display = "block";
             },
-          });
-
-          // Update the image source
-          journalImage.src = journal.front;
-
-          // Animate the image
+            onComplete: () => {
+              // Animate the image
           gsap.to(journalImage, {
             duration: 0.6,
             rotationY: 0,
             ease: "power2.inOut",
-            delay: 0.3,
             onStart: () => {
               journalImage.style.display = "block";
             },
           });
+            }
+          });
+
+          
+
+          
         }
       }
     }
