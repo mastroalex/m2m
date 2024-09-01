@@ -396,6 +396,8 @@ html {
 
 
 
+
+
 #journal-container {
     position: absolute;
     /*top: 50%;*/
@@ -434,4 +436,36 @@ html {
     font-weight: normal;
     padding-top: 10px;
     padding-bottom: 20px;
+}
+
+
+.toggable-section {
+    border-bottom: 1px solid #ddd;
+    padding: 20px 0;
+    cursor: pointer;
+}
+
+.toggable-section .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.toggable-section-content {
+    display: none;
+    margin-top: 20px;
+}
+
+.toggable-section-content.open {
+    display: block;
+}
+
+.toggle-icon {
+    font-size: 1.5em;
+    transition: transform 0.3s ease;
+}
+
+.toggle-icon.open {
+    transform: rotate(180deg);
 }
