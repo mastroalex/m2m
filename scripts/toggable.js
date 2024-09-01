@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const scrollContent = scrollSection.querySelector(".toggable-section");
     
             // Set the title and subtitle in the fixed part
-            const fixedPart = scrollSection.querySelector(".fixed-part");
+            const fixedPart = scrollSection.querySelector(".header");
             fixedPart.querySelector(".title").textContent = section.title;
             fixedPart.querySelector(".subtitle").textContent = section.subtitle;
     
