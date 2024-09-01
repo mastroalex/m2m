@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
           // Load the scroll sections and content
           data.sections.forEach((section) => {
             const scrollSection = document.querySelector(`#${section.id}`);
-            const scrollContent = scrollSection.querySelector(".toggable-section");
+            const scrollContent = scrollSection.querySelector(".toggable-section-content");
     
             // Set the title and subtitle in the fixed part
             const fixedPart = scrollSection.querySelector(".header");
