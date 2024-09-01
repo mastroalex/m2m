@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     sections.forEach(section => {
         const header = section.querySelector('.header');
-        const content = section.querySelector('.section-content');
+        const content = section.querySelector('.toggable-section-content');
         const icon = section.querySelector('.toggle-icon');
 
         header.addEventListener('click', () => {
