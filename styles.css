@@ -58,6 +58,9 @@ html {
     left: 30px;
 }
 
+
+
+
 .scroll-content {
     display: flex;
     height: 100%;
@@ -468,4 +471,27 @@ html {
 
 .toggle-icon.open {
     transform: rotate(180deg);
+}
+
+.toggable-section .header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-left: 30px;
+}
+
+.header .title {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+.header .subtitle {
+    font-size: 1.2em;
+    margin-top: 10px;
+    left: 30px;
+}
+
+.toggable-section-content .scrolling-part{
+    height: 400px;
 }
