@@ -5,12 +5,59 @@ document.addEventListener('DOMContentLoaded', () => {
         const header = section.querySelector('.header');
         const content = section.querySelector('.toggable-section-content');
         const icon = section.querySelector('.toggle-icon');
-
+        let isBabylonInitialized = false; // Track if Babylon.js has been initialized
+        
         header.addEventListener('click', () => {
             content.classList.toggle('open');
             icon.classList.toggle('open');
+
+            if (content.classList.contains('open')) {
+                // Get all chart canvases in the section
+                console.log("Section opened:", section);
+
+                const canvases = content.querySelectorAll('.chartjs-canvas canvas');
+                console.log('Found canvases:', canvases);
+                // Set the width and height of each canvas
+                canvases.forEach(canvas => {
+                    canvas.style.width = '300px';
+                    canvas.style.height = '300px';
+                });
+
+                // Optionally, you can re-render the chart if needed
+                canvases.forEach(canvas => {
+                    const chart = Chart.getChart(canvas);
+                    if (chart) {
+                        chart.resize(); // Resize the chart to fit the new dimensions
+                    }
+                });
+            }
+
+            // Initialize Babylon.js only when the section is opened
+            if (content.classList.contains('open') && !isBabylonInitialized) {
+                initializeBabylonJs(content); // Pass the section content or other relevant element
+                isBabylonInitialized = true; // Mark as initialized
+            }
+
+
         });
     });
+
+    function initializeBabylonJs(element) {
+        // Your Babylon.js initialization code here
+        const canvas = element.querySelector('canvas');
+        const engine = new BABYLON.Engine(canvas, true);
+        const scene = new BABYLON.Scene(engine);
+
+        // Add your Babylon.js scene setup code here...
+
+        engine.runRenderLoop(() => {
+            scene.render();
+        });
+
+        window.addEventListener('resize', () => {
+            engine.resize();
+        });
+    }
 
     function getJsonUrlFromUrl() {
         const urlParams = new URLSearchParams(window.location.search);

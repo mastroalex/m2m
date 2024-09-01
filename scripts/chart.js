@@ -2,6 +2,8 @@ function createChart(container) {
   const canvas = document.createElement("canvas");
   container.appendChild(canvas);
 
+  
+
   const ctx = canvas.getContext("2d");
   new Chart(ctx, {
     type: "bar",
