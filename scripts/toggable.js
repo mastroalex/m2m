@@ -1,4 +1,4 @@
-ocument.addEventListener('DOMContentLoaded', () => {
+Document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('.toggable-section');
 
     sections.forEach(section => {
