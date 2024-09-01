@@ -22,7 +22,7 @@
   },
   "sections": [
     {
-      "id": "scroll-section-1",
+      "id": "section-1",
       "title": "Tissue damage",
       "subtitle": "Modeling of the inflamatory response",
       "contents": [
@@ -45,7 +45,7 @@
       ]
     },
     {
-      "id": "scroll-section-2",
+      "id": "section-2",
       "title": "Atheroscleorosis",
       "subtitle": "Fixed Subtitle 2",
       "contents": [
@@ -70,7 +70,7 @@
       ]
     },
     {
-      "id": "scroll-section-3",
+      "id": "section-3",
       "title": "Vascular tone regulation",
       "subtitle": " Chemo-mechano-biological pathways",
       "contents": [

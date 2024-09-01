@@ -35,6 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
             // Set the title and subtitle in the fixed part
             const fixedPart = scrollSection.querySelector(".header");
+            if (!fixedPart) {
+                console.error(`Header not found in section with ID ${section.id}.`);
+                return;
+            }
+        
             fixedPart.querySelector(".title").textContent = section.title;
             fixedPart.querySelector(".subtitle").textContent = section.subtitle;
     
