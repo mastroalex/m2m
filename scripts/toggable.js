@@ -1,5 +1,5 @@
 ocument.addEventListener('DOMContentLoaded', () => {
-    const sections = document.querySelectorAll('.section');
+    const sections = document.querySelectorAll('.toggable-section');
 
     sections.forEach(section => {
         const header = section.querySelector('.header');
