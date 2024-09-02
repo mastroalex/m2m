@@ -7,17 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const icon = section.querySelector('.toggle-icon');
         let isBabylonInitialized = false; // Track if Babylon.js has been initialized
         
+        
         header.addEventListener('click', () => {
             content.classList.toggle('open');
             icon.classList.toggle('open');
-
-            function sendHeight() {
-              var height = document.documentElement.scrollHeight;
-              window.parent.postMessage(height, '*');
-          }
-          
-          window.addEventListener('load', sendHeight);
-          window.addEventListener('resize', sendHeight);
+            sendHeight();
+            
 
             if (content.classList.contains('open')) {
                 // Get all chart canvases in the section
@@ -48,6 +43,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         });
+
+        function sendHeight() {
+          var height = document.documentElement.scrollHeight;
+          window.parent.postMessage(height, '*');
+      }
+      
+      window.addEventListener('load', sendHeight);
+      window.addEventListener('resize', sendHeight);
     });
 
     function initializeBabylonJs(element) {
