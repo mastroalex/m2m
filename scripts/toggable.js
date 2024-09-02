@@ -11,12 +11,20 @@ document.addEventListener('DOMContentLoaded', () => {
             content.classList.toggle('open');
             icon.classList.toggle('open');
 
+            function sendHeight() {
+              var height = document.documentElement.scrollHeight;
+              window.parent.postMessage(height, '*');
+          }
+          
+          window.addEventListener('load', sendHeight);
+          window.addEventListener('resize', sendHeight);
+
             if (content.classList.contains('open')) {
                 // Get all chart canvases in the section
-                console.log("Section opened:", section);
+                //console.log("Section opened:", section);
 
                 const canvases = content.querySelectorAll('.chartjs-canvas canvas');
-                console.log('Found canvases:', canvases);
+                //console.log('Found canvases:', canvases);
                 // Set the width and height of each canvas
                 canvases.forEach(canvas => {
                     canvas.style.width = '300px';
