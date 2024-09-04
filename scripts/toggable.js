@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const header = section.querySelector(".header");
     const content = section.querySelector(".toggable-section-content");
     const icon = section.querySelector(".toggle-icon");
-    let isBabylonInitialized = false; // Track if Babylon.js has been initialized
 
     header.addEventListener("click", () => {
       content.classList.toggle("open");
@@ -33,11 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
 
-      // Initialize Babylon.js only when the section is opened
-      if (content.classList.contains("open") && !isBabylonInitialized) {
-        initializeBabylonJs(content); // Pass the section content or other relevant element
-        isBabylonInitialized = true; // Mark as initialized
-      }
     });
 
     function sendHeight() {
@@ -49,22 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("resize", sendHeight);
   });
 
-  function initializeBabylonJs(element) {
-    // Your Babylon.js initialization code here
-    const canvas = element.querySelector("canvas");
-    const engine = new BABYLON.Engine(canvas, true);
-    const scene = new BABYLON.Scene(engine);
-
-    // Add your Babylon.js scene setup code here...
-
-    engine.runRenderLoop(() => {
-      scene.render();
-    });
-
-    window.addEventListener("resize", () => {
-      engine.resize();
-    });
-  }
 
   function getJsonUrlFromUrl() {
     const urlParams = new URLSearchParams(window.location.search);

@@ -1,4 +1,9 @@
-function createBabylonScene(container) {
+function createBabylonScene2(container) {
+
+    if (container.babylonEngine) {
+        container.babylonEngine.dispose();
+    }
+
     const canvas = document.createElement('canvas');
     container.appendChild(canvas);
 
@@ -18,15 +23,22 @@ function createBabylonScene(container) {
         scene.render();
     });
 
+    window.removeEventListener('resize', () => {
+        engine.resize();
+    });
     window.addEventListener('resize', () => {
         engine.resize();
     });
 }
 
 // Make the function accessible globally
-window.createBabylonScene = createBabylonScene;
+window.createBabylonScene2 = createBabylonScene2;
 
-function createBabylonScene2(container) {
+function createBabylonScene(container) {
+    if (container.babylonEngine) {
+        container.babylonEngine.dispose();
+    }
+
     const canvas = document.createElement('canvas');
     container.appendChild(canvas);
 
@@ -38,19 +50,13 @@ function createBabylonScene2(container) {
     const camera = new BABYLON.ArcRotateCamera("Camera", Math.PI / 2, -0.2+ Math.PI / 2, 4, BABYLON.Vector3.Zero(), scene);
     camera.attachControl(canvas, true);
     camera.setTarget(BABYLON.Vector3.Zero());
+    camera.setPosition(new BABYLON.Vector3(0, 5, -10));
 
     const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
-    light.intensity = 0.7;
+    light.intensity = 0.5;
 
-    const ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 6, height: 6 }, scene);
-    const groundMaterial = new BABYLON.StandardMaterial("Ground Material", scene);
-    ground.material = groundMaterial;
-    //const groundTexture = new BABYLON.Texture("https://playground.babylonjs.com/textures/ground.jpg", scene);
-    //groundMaterial.diffuseTexture = groundTexture;
-
-    const sphere = BABYLON.MeshBuilder.CreateSphere("sphere", { diameter: 1 }, scene);
-    BABYLON.SceneLoader.ImportMesh("", "https://mastroalex.github.io/m2m/assets/animations/", "Pulled_tissue.glb", scene, function (newMeshes) {
-        newMeshes[0].position = new BABYLON.Vector3(0, 0.6, 0);
+    BABYLON.SceneLoader.ImportMesh("", "../assets/animations/", "Pulled_tissue.glb", scene, function (newMeshes) {
+        newMeshes[0].position = new BABYLON.Vector3(0, 0, 0);
     });
     
 
@@ -58,16 +64,23 @@ function createBabylonScene2(container) {
         scene.render();
     });
 
+    window.removeEventListener('resize', () => {
+        engine.resize();
+    });
     window.addEventListener('resize', () => {
         engine.resize();
     });
 }
 
 // Make the function accessible globally
-window.createBabylonScene2 = createBabylonScene2;
+window.createBabylonScene = createBabylonScene;
 
 
 function createBabylonScene3(container) {
+    if (container.babylonEngine) {
+        container.babylonEngine.dispose();
+    }
+
     const canvas = document.createElement('canvas');
     container.appendChild(canvas);
 
@@ -93,6 +106,9 @@ function createBabylonScene3(container) {
         scene.render();
     });
 
+    window.removeEventListener('resize', () => {
+        engine.resize();
+    });
     window.addEventListener('resize', () => {
         engine.resize();
     });
