@@ -55,7 +55,7 @@ function createBabylonScene(container) {
     const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
     light.intensity = 0.5;
 
-    BABYLON.SceneLoader.ImportMesh("", "../assets/animations/", "Pulled_tissue.glb", scene, function (newMeshes) {
+    BABYLON.SceneLoader.ImportMesh("", "https://mastroalex.github.io/m2m/assets/animations/", "Pulled_tissue.glb", scene, function (newMeshes) {
         newMeshes[0].position = new BABYLON.Vector3(0, 0, 0);
     });
     
