@@ -99,6 +99,15 @@ document.addEventListener("DOMContentLoaded", () => {
         fixedPart.querySelector(".title").textContent = section.title;
         fixedPart.querySelector(".subtitle").textContent = section.subtitle;
 
+        // Dynamically load the scripts from the scriptFiles array
+        if (data.scriptFiles) {
+          data.scriptFiles.forEach((scriptObj) => {
+            const script = document.createElement("script");
+            script.src = scriptObj.scriptFile;
+            document.body.appendChild(script);
+          });
+        }
+        
         section.contents.forEach((content, index) => {
           const scrollingPart = scrollContent.children[index];
           scrollingPart.querySelector(".left-content .text").textContent =
@@ -153,14 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
               window[content.contentFunction](divElement);
             }
           }
-          // Dynamically load the scripts from the scriptFiles array
-          if (data.scriptFiles) {
-            data.scriptFiles.forEach((scriptObj) => {
-              const script = document.createElement("script");
-              script.src = scriptObj.scriptFile;
-              document.body.appendChild(script);
-            });
-          }
+          
         });
       });
 
