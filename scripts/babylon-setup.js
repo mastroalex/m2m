@@ -49,7 +49,7 @@ function createBabylonScene2(container) {
     groundMaterial.diffuseTexture = groundTexture;
 
     //const sphere = BABYLON.MeshBuilder.CreateSphere("sphere", { diameter: 1 }, scene);
-    BABYLON.SceneLoader.ImportMesh("", "https://assets.babylonjs.com/meshes/", "alien.glb", scene, function (newMeshes) {
+    BABYLON.SceneLoader.ImportMesh("", "https://github.com/mastroalex/m2m/raw/main/assets/animations/", "Pulled_tissue.glb", scene, function (newMeshes) {
         newMeshes[0].position = new BABYLON.Vector3(0, 0.6, 0);
     });
 
