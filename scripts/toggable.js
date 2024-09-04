@@ -86,7 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (data.scriptFiles) {
         data.scriptFiles.forEach((scriptObj) => {
           const script = document.createElement("script");
-          script.src = scriptObj.scriptFile;
+          script.async = false; // Ensures scripts load in the order they're appended
+          script.onerror = () => console.error(`Failed to load script: ${scriptObj.scriptFile}`);
           document.body.appendChild(script);
         });
       }
