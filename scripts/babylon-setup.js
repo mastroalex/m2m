@@ -48,10 +48,7 @@ function createBabylonScene2(container) {
     const groundTexture = new BABYLON.Texture("https://playground.babylonjs.com/textures/ground.jpg", scene);
     groundMaterial.diffuseTexture = groundTexture;
 
-    //const sphere = BABYLON.MeshBuilder.CreateSphere("sphere", { diameter: 1 }, scene);
-    BABYLON.SceneLoader.ImportMesh("", "https://mastroalex.github.io/m2m/assets/animations/", "Pulled_tissue.glb", scene, function (newMeshes) {
-        newMeshes[0].position = new BABYLON.Vector3(0, 0.6, 0);
-    });
+    
 
     engine.runRenderLoop(() => {
         scene.render();
