@@ -1,4 +1,8 @@
 {
+  "scriptFiles": [
+    { "scriptFile": "scripts/chart.js" },
+    { "scriptFile": "scripts/svgAnimate.js" }
+  ],
   "mainSection": {
     "svgImage": {
       "link": "https://raw.githubusercontent.com/mastroalex/m2m/main/assets/imgs/drawing.svg"
