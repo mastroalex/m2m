@@ -75,116 +75,106 @@ document.addEventListener("DOMContentLoaded", () => {
   // Get JSON URL from URL or default to 'content.json'
   const jsonUrl = getJsonUrlFromUrl();
 
-  fetch(jsonUrl)
-    .then((response) => response.json())
-    .then((data) => {
-      const mainText = document.querySelector(".main-text");
-      if (mainText) {
-        mainText.textContent = data.mainSection.Text; // Set the text content
-      }
-      // Dynamically load the scripts from the scriptFiles array
-      if (data.scriptFiles) {
-        data.scriptFiles.forEach((scriptObj) => {
-          const script = document.createElement("script");
-          script.async = false; // Ensures scripts load in the order they're appended
-          script.onerror = () => console.error(`Failed to load script: ${scriptObj.scriptFile}`);
-          document.body.appendChild(script);
+
+    // Function to dynamically load the script files
+    function loadScripts(scriptFiles) {
+      return scriptFiles.reduce((promiseChain, scriptObj) => {
+          return promiseChain.then(() => {
+              return new Promise((resolve, reject) => {
+                  const script = document.createElement('script');
+                  script.src = scriptObj.scriptFile;
+                  script.async = false; // Ensures scripts load in the order they're appended
+                  script.onload = () => {
+                      console.log(`Script loaded: ${scriptObj.scriptFile}`);
+                      resolve();
+                  };
+                  script.onerror = () => {
+                      console.error(`Failed to load script: ${scriptObj.scriptFile}`);
+                      reject();
+                  };
+                  document.body.appendChild(script);
+              });
+          });
+      }, Promise.resolve()); // Start with a resolved promise to chain the script loading
+  }
+
+
+
+// Fetch JSON data and process it once scripts are loaded
+fetch(jsonUrl)
+.then(response => response.json())
+.then(data => {
+    if (data.scriptFiles) {
+        // Load the scripts from the scriptFiles array first
+        loadScripts(data.scriptFiles).then(() => {
+            // Once all scripts are loaded, now process the JSON
+            processJsonData(data);
+        }).catch(error => {
+            console.error("Error loading scripts:", error);
         });
-      }
-      
-      // Load the scroll sections and content
-      data.sections.forEach((section) => {
-        const scrollSection = document.querySelector(`#${section.id}`);
-        const scrollContent = scrollSection.querySelector(
-          ".toggable-section-content"
-        );
+    } else {
+        // If there are no external scripts, directly process the JSON
+        processJsonData(data);
+    }
+})
+.catch(error => {
+    console.error("Error fetching JSON:", error);
+});
 
-        // Set the title and subtitle in the fixed part
-        const fixedPart = scrollSection.querySelector(".header");
-        if (!fixedPart) {
-          console.error(`Header not found in section with ID ${section.id}.`);
-          return;
-        }
+// Function to process JSON data
+function processJsonData(data) {
+const mainText = document.querySelector(".main-text");
+if (mainText) {
+    mainText.textContent = data.mainSection.Text;
+}
 
-        fixedPart.querySelector(".title").textContent = section.title;
-        fixedPart.querySelector(".subtitle").textContent = section.subtitle;
+data.sections.forEach(section => {
+    const scrollSection = document.querySelector(`#${section.id}`);
+    const scrollContent = scrollSection.querySelector(".toggable-section-content");
 
-        
-        section.contents.forEach((content, index) => {
-          const scrollingPart = scrollContent.children[index];
-          scrollingPart.querySelector(".left-content .text").textContent =
-            content.text;
+    const fixedPart = scrollSection.querySelector(".header");
+    if (!fixedPart) {
+        console.error(`Header not found in section with ID ${section.id}.`);
+        return;
+    }
 
-          if (content.isImage) {
+    fixedPart.querySelector(".title").textContent = section.title;
+    fixedPart.querySelector(".subtitle").textContent = section.subtitle;
+
+    section.contents.forEach((content, index) => {
+        const scrollingPart = scrollContent.children[index];
+        scrollingPart.querySelector(".left-content .text").textContent = content.text;
+
+        if (content.isImage) {
             const imageElement = document.createElement("img");
             imageElement.src = content.image;
-            scrollingPart
-              .querySelector(".right-content .media")
-              .appendChild(imageElement);
-          } else if (content.canvasType === "chart") {
+            scrollingPart.querySelector(".right-content .media").appendChild(imageElement);
+        } else if (content.canvasType === "chart") {
             const canvasElement = document.createElement("div");
             canvasElement.classList.add("chartjs-canvas");
-            scrollingPart
-              .querySelector(".right-content .media")
-              .appendChild(canvasElement);
+            scrollingPart.querySelector(".right-content .media").appendChild(canvasElement);
 
-            // Call the specified function to generate the Chart.js content
-            if (
-              content.contentFunction &&
-              typeof window[content.contentFunction] === "function"
-            ) {
-              window[content.contentFunction](canvasElement);
+            if (content.contentFunction && typeof window[content.contentFunction] === "function") {
+                window[content.contentFunction](canvasElement);
             }
-          } else if (content.canvasType === "babylon") {
+        } else if (content.canvasType === "babylon") {
             const canvasElement = document.createElement("div");
             canvasElement.classList.add("babylon-canvas");
-            scrollingPart
-              .querySelector(".right-content .media")
-              .appendChild(canvasElement);
+            scrollingPart.querySelector(".right-content .media").appendChild(canvasElement);
 
-            // Call the specified function to generate the Babylon.js content
-            if (
-              content.contentFunction &&
-              typeof window[content.contentFunction] === "function"
-            ) {
-              window[content.contentFunction](canvasElement);
+            if (content.contentFunction && typeof window[content.contentFunction] === "function") {
+                window[content.contentFunction](canvasElement);
             }
-          } else {
+        } else {
             const divElement = document.createElement("div");
             divElement.classList.add("generic-content");
-            scrollingPart
-              .querySelector(".right-content .media")
-              .appendChild(divElement);
+            scrollingPart.querySelector(".right-content .media").appendChild(divElement);
 
-            // Call the specified function to generate the generic content
-            if (
-              content.contentFunction &&
-              typeof window[content.contentFunction] === "function"
-            ) {
-              window[content.contentFunction](divElement);
+            if (content.contentFunction && typeof window[content.contentFunction] === "function") {
+                window[content.contentFunction](divElement);
             }
-          }
-          
-        });
-      });
-
-      // Add event listeners to stop scroll propagation on canvas elements
-      document
-        .querySelectorAll(".scrolling-part .media canvas")
-        .forEach((canvas) => {
-          canvas.addEventListener("wheel", (event) => {
-            if (!event.target.closest(".media")) {
-              event.preventDefault();
-            }
-            event.stopPropagation();
-          });
-          canvas.addEventListener("touchmove", (event) => {
-            if (!event.target.closest(".media")) {
-              event.preventDefault();
-            }
-            event.stopPropagation();
-          });
-        });
-    })
-    .catch((error) => console.error("Error fetching JSON:", error));
+        }
+    });
+});
+}
 });
