@@ -82,6 +82,15 @@ document.addEventListener("DOMContentLoaded", () => {
       if (mainText) {
         mainText.textContent = data.mainSection.Text; // Set the text content
       }
+      // Dynamically load the scripts from the scriptFiles array
+      if (data.scriptFiles) {
+        data.scriptFiles.forEach((scriptObj) => {
+          const script = document.createElement("script");
+          script.src = scriptObj.scriptFile;
+          document.body.appendChild(script);
+        });
+      }
+      
       // Load the scroll sections and content
       data.sections.forEach((section) => {
         const scrollSection = document.querySelector(`#${section.id}`);
@@ -99,14 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {
         fixedPart.querySelector(".title").textContent = section.title;
         fixedPart.querySelector(".subtitle").textContent = section.subtitle;
 
-        // Dynamically load the scripts from the scriptFiles array
-        if (data.scriptFiles) {
-          data.scriptFiles.forEach((scriptObj) => {
-            const script = document.createElement("script");
-            script.src = scriptObj.scriptFile;
-            document.body.appendChild(script);
-          });
-        }
         
         section.contents.forEach((content, index) => {
           const scrollingPart = scrollContent.children[index];
